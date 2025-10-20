@@ -1,0 +1,35 @@
+# GitHub Sponsors configuration
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository
+
+# GitHub username for GitHub Sponsors
+github: [kevinyuan]
+
+# Patreon username
+# patreon: username
+
+# Open Collective username
+# open_collective: username
+
+# Ko-fi username
+# ko_fi: username
+
+# Tidelift platform and package name
+# tidelift: npm/package-name
+
+# Community Bridge project name
+# community_bridge: project-name
+
+# Liberapay username
+# liberapay: username
+
+# IssueHunt username
+# issuehunt: username
+
+# Otechie username
+# otechie: username
+
+# LFX Mentorship project name
+# lfx_crowdfunding: project-name
+
+# Custom sponsorship URLs (up to 4)
+# custom: ['https://www.paypal.me/username', 'https://buy.me/a/coffee']
