@@ -1,0 +1,74 @@
+{
+  "id": "ai-accelerator-001",
+  "name": "AI/ML Accelerator",
+  "category": "Accelerator",
+  "version": "1.0.0",
+  "createdAt": "2025-10-18T16:50:22.627Z",
+  "updatedAt": "2025-10-21T10:28:31.648Z",
+  "properties": {
+    "power": {
+      "typical": "25W",
+      "peak": "40W",
+      "idle": "2W",
+      "voltage": "0.8V"
+    },
+    "physical": {
+      "area": "50 mm²",
+      "technology": "5nm",
+      "packageType": "BGA"
+    },
+    "defaultPathLatency": 10
+  },
+  "interfaces": [
+    {
+      "id": "pcie-interface",
+      "name": "PCIe x16 Interface",
+      "direction": "master",
+      "speed": "16 GT/s",
+      "busType": "AXI4",
+      "dataWidth": 16,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "south"
+    },
+    {
+      "id": "hbm-interface",
+      "name": "HBM3 Interface",
+      "direction": "master",
+      "speed": "6.4 Gbps",
+      "busType": "AXI4",
+      "dataWidth": 1024,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "south"
+    }
+  ],
+  "description": "High-performance AI/ML accelerator with 100 TOPS compute capability and HBM3 memory",
+  "tags": [
+    "AI",
+    "ML",
+    "NPU",
+    "100TOPS",
+    "HBM3",
+    "inference",
+    "training"
+  ],
+  "vendor": "NVIDIA",
+  "partNumber": "H100-Lite",
+  "compatibility": [
+    "PCIe 4.0",
+    "HBM3",
+    "CUDA",
+    "TensorRT"
+  ],
+  "customizable": false,
+  "visualization": {
+    "icon": "Zap",
+    "width": 160,
+    "height": 100
+  },
+  "addressMapping": {
+    "baseAddress": "1MB",
+    "addressSpace": "0x80000000"
+  }
+}

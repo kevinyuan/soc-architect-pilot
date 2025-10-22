@@ -1,0 +1,68 @@
+{
+  "id": "gpio-controller-001",
+  "name": "GPIO Controller",
+  "category": "IO",
+  "version": "1.0.0",
+  "createdAt": "2025-10-18T16:50:22.630Z",
+  "updatedAt": "2025-10-21T10:28:31.648Z",
+  "properties": {
+    "power": {
+      "typical": "10mW",
+      "peak": "50mW",
+      "idle": "1mW",
+      "voltage": "1.8V - 3.3V"
+    },
+    "physical": {
+      "area": "1 mm²",
+      "technology": "40nm",
+      "packageType": "Embedded"
+    },
+    "defaultPathLatency": 10
+  },
+  "interfaces": [
+    {
+      "id": "apb-interface",
+      "name": "APB Slave Interface",
+      "direction": "slave",
+      "speed": "100 MHz",
+      "dataWidth": 32,
+      "busType": "APB",
+      "placement": "north"
+    },
+    {
+      "id": "gpio-pins",
+      "name": "GPIO Pins",
+      "direction": "master",
+      "voltage": "1.8V - 3.3V",
+      "dataWidth": 32,
+      "busType": "GPIO",
+      "placement": "south"
+    }
+  ],
+  "description": "32-channel GPIO controller with interrupt support and configurable drive strength",
+  "tags": [
+    "GPIO",
+    "32-channel",
+    "interrupt",
+    "configurable",
+    "embedded"
+  ],
+  "vendor": "ARM",
+  "partNumber": "PL061",
+  "compatibility": [
+    "APB",
+    "AHB",
+    "GPIO"
+  ],
+  "customizable": true,
+  "baseTemplate": "gpio-controller-base",
+  "visualization": {
+    "icon": "Plug",
+    "width": 160,
+    "height": 100
+  },
+  "addressMapping": {
+    "baseAddress": "1MB",
+    "addressSpace": "0x80000000"
+  }
+}

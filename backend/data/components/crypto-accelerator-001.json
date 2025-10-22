@@ -1,0 +1,64 @@
+{
+  "id": "crypto-accelerator-001",
+  "name": "Cryptographic Accelerator",
+  "category": "Accelerator",
+  "version": "1.0.0",
+  "createdAt": "2025-10-18T16:50:22.628Z",
+  "updatedAt": "2025-10-21T10:28:31.648Z",
+  "properties": {
+    "power": {
+      "typical": "2W",
+      "peak": "3W",
+      "idle": "100mW",
+      "voltage": "1.0V"
+    },
+    "physical": {
+      "area": "8 mm²",
+      "technology": "7nm",
+      "packageType": "BGA"
+    },
+    "defaultPathLatency": 10
+  },
+  "interfaces": [
+    {
+      "id": "axi-interface",
+      "name": "AXI4 Interface",
+      "direction": "master",
+      "speed": "1 GHz",
+      "busType": "AXI4",
+      "dataWidth": 128,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "south"
+    }
+  ],
+  "description": "Hardware cryptographic accelerator supporting AES, RSA, ECC, and hash functions",
+  "tags": [
+    "crypto",
+    "security",
+    "AES",
+    "RSA",
+    "ECC",
+    "hash",
+    "hardware"
+  ],
+  "vendor": "Rambus",
+  "partNumber": "CryptoManager",
+  "compatibility": [
+    "AXI4",
+    "AES",
+    "RSA",
+    "ECC"
+  ],
+  "customizable": true,
+  "baseTemplate": "crypto-accelerator-base",
+  "visualization": {
+    "icon": "Shield",
+    "width": 160,
+    "height": 100
+  },
+  "addressMapping": {
+    "baseAddress": "1MB",
+    "addressSpace": "0x80000000"
+  }
+}

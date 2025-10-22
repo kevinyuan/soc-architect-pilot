@@ -1,0 +1,83 @@
+{
+  "id": "risc-v-rv64gc-001",
+  "name": "RISC-V RV64GC",
+  "category": "CPU",
+  "version": "1.0.0",
+  "createdAt": "2025-10-18T16:50:22.631Z",
+  "updatedAt": "2025-10-21T10:28:31.648Z",
+  "properties": {
+    "power": {
+      "typical": "800mW",
+      "peak": "1.5W",
+      "idle": "50mW",
+      "voltage": "0.9V - 1.2V"
+    },
+    "physical": {
+      "area": "2.8 mm²",
+      "technology": "7nm",
+      "packageType": "BGA"
+    },
+    "interfaces": [
+      "AXI4",
+      "TileLink"
+    ],
+    "protocols": [
+      "RV64GC",
+      "Vector",
+      "Hypervisor"
+    ],
+    "defaultPathLatency": 5
+  },
+  "interfaces": [
+    {
+      "id": "axi4-master",
+      "name": "AXI4 Master",
+      "direction": "master",
+      "speed": "1.5 GHz",
+      "busType": "AXI4",
+      "dataWidth": 64,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "south"
+    },
+    {
+      "id": "tilelink",
+      "name": "TileLink",
+      "direction": "master",
+      "busType": "AXI4",
+      "dataWidth": 64,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "south"
+    }
+  ],
+  "description": "Open-source RISC-V 64-bit processor with vector extensions for AI and HPC workloads",
+  "tags": [
+    "RISC-V",
+    "RV64GC",
+    "64-bit",
+    "open-source",
+    "vector",
+    "AI",
+    "HPC"
+  ],
+  "vendor": "SiFive",
+  "partNumber": "U74-MC",
+  "datasheet": "https://www.sifive.com/cores/u74-mc",
+  "compatibility": [
+    "AXI4",
+    "TileLink",
+    "RV64GC"
+  ],
+  "customizable": true,
+  "baseTemplate": "risc-v-series",
+  "visualization": {
+    "icon": "Cpu",
+    "width": 160,
+    "height": 100
+  },
+  "addressMapping": {
+    "baseAddress": "-",
+    "addressSpace": "-"
+  }
+}

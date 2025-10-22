@@ -1,0 +1,61 @@
+{
+  "id": "dsp-accelerator-001",
+  "name": "DSP Accelerator",
+  "category": "Accelerator",
+  "version": "1.0.0",
+  "createdAt": "2025-10-18T16:50:22.629Z",
+  "updatedAt": "2025-10-21T10:28:31.648Z",
+  "properties": {
+    "power": {
+      "typical": "5W",
+      "peak": "8W",
+      "idle": "500mW",
+      "voltage": "1.0V"
+    },
+    "physical": {
+      "area": "20 mm²",
+      "technology": "7nm",
+      "packageType": "BGA"
+    },
+    "defaultPathLatency": 10
+  },
+  "interfaces": [
+    {
+      "id": "axi-stream",
+      "name": "AXI4-Stream Interface",
+      "direction": "master",
+      "speed": "500 MHz",
+      "busType": "AXI4",
+      "dataWidth": 512,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "south"
+    }
+  ],
+  "description": "High-performance DSP accelerator for signal processing, filtering, and FFT operations",
+  "tags": [
+    "DSP",
+    "signal-processing",
+    "FFT",
+    "filtering",
+    "GMACS"
+  ],
+  "vendor": "Texas Instruments",
+  "partNumber": "C66x",
+  "compatibility": [
+    "AXI4-Stream",
+    "FFTW",
+    "BLAS"
+  ],
+  "customizable": true,
+  "baseTemplate": "dsp-accelerator-base",
+  "visualization": {
+    "icon": "Radio",
+    "width": 160,
+    "height": 100
+  },
+  "addressMapping": {
+    "baseAddress": "1MB",
+    "addressSpace": "0x80000000"
+  }
+}

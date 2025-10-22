@@ -1,0 +1,60 @@
+{
+  "id": "ethernet-10g-001",
+  "name": "10G Ethernet Controller",
+  "category": "IO",
+  "version": "1.0.0",
+  "createdAt": "2025-10-18T16:50:22.630Z",
+  "updatedAt": "2025-10-21T10:28:31.648Z",
+  "properties": {
+    "power": {
+      "typical": "2W",
+      "peak": "3W",
+      "idle": "200mW",
+      "voltage": "1.8V"
+    },
+    "physical": {
+      "area": "15 mm²",
+      "technology": "16nm",
+      "packageType": "BGA"
+    },
+    "defaultPathLatency": 10
+  },
+  "interfaces": [
+    {
+      "id": "pcie-interface",
+      "name": "PCIe x4 Interface",
+      "direction": "master",
+      "speed": "8 GT/s",
+      "busType": "AXI4",
+      "dataWidth": 4,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "south"
+    }
+  ],
+  "description": "High-performance 10 Gigabit Ethernet controller with hardware offload capabilities",
+  "tags": [
+    "Ethernet",
+    "10G",
+    "10GBASE-T",
+    "networking",
+    "offload"
+  ],
+  "vendor": "Intel",
+  "partNumber": "X710",
+  "compatibility": [
+    "PCIe",
+    "10GBASE-T",
+    "IEEE 802.3"
+  ],
+  "customizable": false,
+  "visualization": {
+    "icon": "Cable",
+    "width": 160,
+    "height": 100
+  },
+  "addressMapping": {
+    "baseAddress": "1MB",
+    "addressSpace": "0x80000000"
+  }
+}

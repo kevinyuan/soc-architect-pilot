@@ -1,0 +1,242 @@
+
+"use client";
+
+import * as React from "react";
+import Link from 'next/link'; // Import Link
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Sparkles, FolderClock, PlusCircle, FolderOpen, Home as HomeIcon, FileJson2 as CodeIcon, ArrowRight, LogOut, Blocks as ArchitectIcon, Building, BarChart3 as AnalyticsIcon, ShieldCheck as DRCIcon, Lightbulb as ConceptIcon } from "lucide-react";
+import { OpenProjectDialog } from "./OpenProjectDialog";
+import { CreateWorkspaceDialog } from "./CreateWorkspaceDialog";
+import type { ViewMode } from '@/types/ide';
+import { cn } from "@/lib/utils";
+
+interface HomeViewProps {
+  currentUser: string;
+  currentProjectRoot: string | null;
+  currentProjectName?: string | null;
+  onViewChange: (viewMode: ViewMode) => void;
+  onProjectSelected: (projectPath: string | null, projectName?: string | null) => void;
+  onActivateHomeView: () => void;
+  onActivateConceptView?: () => void;
+  onActivateArchitectView: () => void;
+}
+
+interface WorkflowCardProps {
+  title: string;
+  description: string;
+  icon: React.ElementType;
+  stageNumber?: number;
+  onClick?: () => void;
+  className?: string;
+}
+
+const WorkflowCard: React.FC<WorkflowCardProps> = ({ title, description, icon: Icon, stageNumber, onClick, className }) => {
+  return (
+    <div className="flex flex-col items-center flex-1 min-w-[120px] xs:min-w-[132px] sm:min-w-[144px] md:min-w-[168px] lg:min-w-[180px]">
+      <Card
+        className={cn(
+          "shadow-lg border-border/70 rounded-lg w-full max-w-[288px] h-48 flex flex-col items-center justify-center text-center p-4 cursor-pointer hover:shadow-xl hover:border-primary/50 transition-all",
+          className
+        )}
+        onClick={onClick}
+      >
+        <Icon className="h-10 w-10 mb-3 text-primary" />
+        <CardTitle className="text-lg mb-1">{title}</CardTitle>
+        <CardDescription className="text-xs">{description}</CardDescription>
+      </Card>
+      {stageNumber && (
+        <p className="mt-2 text-sm font-medium text-muted-foreground">Stage {stageNumber}</p>
+      )}
+    </div>
+  );
+};
+
+export function HomeView({
+  currentUser,
+  currentProjectRoot,
+  currentProjectName,
+  onViewChange,
+  onProjectSelected,
+  onActivateHomeView,
+  onActivateConceptView,
+  onActivateArchitectView,
+}: HomeViewProps) {
+  const [isOpenDialogOpen, setIsOpenDialogOpen] = React.useState(false);
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = React.useState(false);
+
+  const handleOpenProjectFromDialog = (projectPath: string) => {
+    onProjectSelected(projectPath);
+  };
+
+  const WelcomePage = () => (
+    <>
+      <div className="relative z-10 flex flex-col items-center w-full space-y-10">
+        <header className="text-center">
+          <h1 className="text-4xl md:text-5xl font-bold font-headline mb-2">Welcome to SoC Pilot</h1>
+          <p className="text-lg md:text-xl text-muted-foreground">Your AI-powered SoC design and architecture platform.</p>
+        </header>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full px-4 md:px-0">
+          <Card className="shadow-lg border-border/70 rounded-lg">
+            <CardHeader>
+              <CardTitle className="flex items-center text-xl md:text-2xl">
+                <FolderClock className="h-6 w-6 mr-2 text-primary" />
+                Recent Workspaces
+              </CardTitle>
+              <CardDescription>Quickly jump back into your projects.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ScrollArea className="h-[220px] pr-3">
+                <ul className="space-y-3">
+                  {[
+                    { id: '1', name: 'SoC Pilot Main', path: 'main-project', lastOpened: '2 hours ago', icon: <FolderClock className="h-5 w-5 mr-3 text-primary" /> },
+                    { id: '2', name: 'Dual Processor SoC', path: 'example-dual-processors', lastOpened: 'Yesterday', icon: <FolderClock className="h-5 w-5 mr-3 text-primary" /> },
+                  ].map((ws) => (
+                    <li key={ws.id}>
+                      <Button
+                        variant="outline"
+                        className="w-full justify-start h-auto py-3 px-4 text-left hover:bg-accent/50 transition-colors duration-150 rounded-md border-border/50"
+                        onClick={() => onProjectSelected(ws.path)}
+                      >
+                        <div className="shrink-0">{ws.icon}</div>
+                        <div className="min-w-0">
+                          <span className="font-medium block truncate">{ws.name}</span>
+                          <p className="text-xs text-muted-foreground truncate">{ws.path} <span className="hidden sm:inline">- {ws.lastOpened}</span></p>
+                        </div>
+                      </Button>
+                    </li>
+                  ))}
+                </ul>
+              </ScrollArea>
+            </CardContent>
+          </Card>
+
+          <Card className="shadow-lg border-border/70 rounded-lg flex flex-col items-center justify-center p-6 text-center">
+            <CardHeader className="items-center">
+              <CardTitle className="flex flex-col items-center text-xl md:text-2xl">
+                <PlusCircle className="h-8 w-8 mb-3 text-primary" />
+                Start Something New
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="flex flex-col items-center space-y-4 w-full max-w-xs">
+              <Button
+                size="lg"
+                className="w-full text-base py-3"
+                onClick={() => setIsCreateDialogOpen(true)}
+              >
+                <PlusCircle className="mr-2 h-5 w-5" /> Create New Workspace
+              </Button>
+              <Button
+                variant="outline"
+                className="w-full text-base py-3"
+                onClick={() => setIsOpenDialogOpen(true)}
+              >
+                <FolderOpen className="mr-2 h-5 w-5" /> Open Existing Workspace...
+              </Button>
+              <Button
+                variant="secondary" 
+                className="w-full text-base py-3"
+                asChild 
+              >
+                <Link href="/landing" target="_blank" rel="noopener noreferrer">
+                  <Building className="mr-2 h-5 w-5" /> About Our Company
+                </Link>
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+      <footer className="absolute bottom-4 text-xs text-muted-foreground z-10">
+        SoC Pilot v0.1.0 - AI-Powered SoC Design Platform
+      </footer>
+    </>
+  );
+
+  const WorkflowPage = () => (
+    <div className="relative z-10 flex flex-col items-center justify-center w-full h-full space-y-8 p-4">
+      <header className="text-center">
+        <h1 className="text-3xl md:text-4xl font-bold font-headline mb-1">Workspace: {currentProjectName || currentProjectRoot}</h1>
+        <p className="text-md md:text-lg text-muted-foreground">Follow the typical firmware development workflow.</p>
+      </header>
+
+      <div className="flex flex-row flex-nowrap items-center justify-center w-full max-w-7xl mx-auto gap-x-2 md:gap-x-4 px-4">
+        <WorkflowCard
+          title="Concept"
+          description="AI chat for requirements"
+          icon={ConceptIcon}
+          onClick={onActivateConceptView}
+          stageNumber={1}
+        />
+        <div className="hidden md:flex items-center flex-shrink-0 px-0.5">
+          <ArrowRight className="h-5 w-5 text-muted-foreground shrink-0" />
+        </div>
+        <WorkflowCard
+          title="Architecture"
+          description="Canvas-based design"
+          icon={ArchitectIcon}
+          onClick={onActivateArchitectView}
+          stageNumber={2}
+        />
+        <div className="hidden md:flex items-center flex-shrink-0 px-0.5">
+          <ArrowRight className="h-5 w-5 text-muted-foreground shrink-0" />
+        </div>
+        <WorkflowCard
+          title="Validation"
+          description="Design rule checks"
+          icon={DRCIcon}
+          onClick={() => onViewChange('drc')}
+          stageNumber={3}
+        />
+        <div className="hidden md:flex items-center flex-shrink-0 px-0.5">
+          <ArrowRight className="h-5 w-5 text-muted-foreground shrink-0" />
+        </div>
+        <WorkflowCard
+          title="Code"
+          description="AI code generation"
+          icon={CodeIcon}
+          onClick={() => onViewChange('code')}
+          stageNumber={4}
+        />
+        <div className="hidden md:flex items-center flex-shrink-0 px-0.5">
+          <ArrowRight className="h-5 w-5 text-muted-foreground shrink-0" />
+        </div>
+        <WorkflowCard
+          title="Analytics"
+          description="Performance insights"
+          icon={AnalyticsIcon}
+          onClick={() => onViewChange('analytics')}
+          stageNumber={5}
+        />
+      </div>
+      <p className="text-xs text-muted-foreground">Click a card to navigate to the corresponding development stage.</p>
+      
+      <div className="mt-6">
+        <Button variant="outline" onClick={onActivateHomeView}>
+          <LogOut className="mr-2 h-4 w-4" /> Close Workspace
+        </Button>
+      </div>
+    </div>
+  );
+
+  return (
+    <>
+      <div className="relative flex flex-col items-center justify-center h-full bg-background text-foreground p-8 overflow-hidden">
+        <Sparkles className="absolute inset-0 m-auto h-3/5 w-3/5 text-primary/5 opacity-50 pointer-events-none z-0" data-ai-hint="sparkling background" />
+        {currentProjectRoot ? <WorkflowPage /> : <WelcomePage />}
+      </div>
+      <CreateWorkspaceDialog
+        isOpen={isCreateDialogOpen}
+        onOpenChange={setIsCreateDialogOpen}
+        onWorkspaceCreated={handleOpenProjectFromDialog}
+      />
+      <OpenProjectDialog
+        isOpen={isOpenDialogOpen}
+        onOpenChange={setIsOpenDialogOpen}
+        username={currentUser}
+        onOpenProject={handleOpenProjectFromDialog}
+      />
+    </>
+  );
+}

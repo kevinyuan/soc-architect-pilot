@@ -1,0 +1,260 @@
+{
+  "id": "cxl-memory-expander-template",
+  "name": "CXL Memory Expander",
+  "description": "ARM CPU with CXL 3.0 controller and 4 DDR memory controllers",
+  "createdAt": "2025-10-21T01:17:01.478Z",
+  "diagram": {
+    "nodes": [
+      {
+        "id": "cxl-controller",
+        "position": {
+          "x": 353.936432502243,
+          "y": 115.23799363194672
+        },
+        "data": {
+          "label": "CXL 2.0 Controller",
+          "interfaces": [
+            {
+              "id": "mc_port_0",
+              "name": "Memory Controller Port",
+              "direction": "master",
+              "dataWidth": 128,
+              "busType": "Custom"
+            }
+          ],
+          "rank": 2,
+          "model_type": "Default Type",
+          "iconName": "Box",
+          "width": 160,
+          "height": 80,
+          "target_addr_base": "",
+          "target_addr_space": ""
+        },
+        "type": "dynamicNode",
+        "width": 160,
+        "height": 80
+      },
+      {
+        "id": "crossbar",
+        "position": {
+          "x": 265.51852191072896,
+          "y": 378.48481827725584
+        },
+        "data": {
+          "label": "NoC",
+          "interfaces": [
+            {
+              "id": "master_in",
+              "name": "Master Input",
+              "direction": "slave",
+              "dataWidth": 128
+            },
+            {
+              "id": "slave_out_0",
+              "name": "Slave Output 0",
+              "direction": "master",
+              "dataWidth": 32
+            },
+            {
+              "id": "slave_out_1",
+              "name": "Slave Output 1",
+              "direction": "master",
+              "dataWidth": 32
+            },
+            {
+              "id": "slave_out_2",
+              "name": "Slave Output 2",
+              "direction": "master",
+              "dataWidth": 32
+            },
+            {
+              "id": "slave_out_3",
+              "name": "Slave Output 3",
+              "direction": "master",
+              "dataWidth": 32
+            }
+          ],
+          "rank": 1,
+          "model_type": "Default Type",
+          "iconName": "Box",
+          "width": 320,
+          "height": 120,
+          "target_addr_base": "",
+          "target_addr_space": ""
+        },
+        "type": "dynamicNode",
+        "width": 320,
+        "height": 120
+      },
+      {
+        "id": "ddr5-0",
+        "position": {
+          "x": 50,
+          "y": 750
+        },
+        "data": {
+          "label": "DDR5 Controller 0",
+          "interfaces": [
+            {
+              "id": "mc_if",
+              "name": "Memory Controller Interface",
+              "direction": "slave",
+              "dataWidth": 32
+            }
+          ],
+          "rank": 2,
+          "model_type": "Default Type",
+          "iconName": "Box",
+          "width": 160,
+          "height": 80,
+          "target_addr_base": "",
+          "target_addr_space": ""
+        },
+        "type": "dynamicNode",
+        "width": 160,
+        "height": 80
+      },
+      {
+        "id": "ddr5-1",
+        "position": {
+          "x": 276.5931034482759,
+          "y": 751.1402298850575
+        },
+        "data": {
+          "label": "DDR5 Controller 1",
+          "interfaces": [
+            {
+              "id": "mc_if",
+              "name": "Memory Controller Interface",
+              "direction": "slave",
+              "dataWidth": 32
+            }
+          ],
+          "rank": 2,
+          "model_type": "Default Type",
+          "iconName": "Box",
+          "width": 160,
+          "height": 80,
+          "target_addr_base": "",
+          "target_addr_space": ""
+        },
+        "type": "dynamicNode",
+        "width": 160,
+        "height": 80
+      },
+      {
+        "id": "ddr5-2",
+        "position": {
+          "x": 481.2719846751313,
+          "y": 750.3113998606761
+        },
+        "data": {
+          "label": "DDR5 Controller 2",
+          "interfaces": [
+            {
+              "id": "mc_if",
+              "name": "Memory Controller Interface",
+              "direction": "slave",
+              "dataWidth": 32
+            }
+          ],
+          "rank": 2,
+          "model_type": "Default Type",
+          "iconName": "Box",
+          "width": 160,
+          "height": 80,
+          "target_addr_base": "",
+          "target_addr_space": ""
+        },
+        "type": "dynamicNode",
+        "width": 160,
+        "height": 80
+      },
+      {
+        "id": "ddr5-3",
+        "position": {
+          "x": 627.3401430179256,
+          "y": 748.9403894941003
+        },
+        "data": {
+          "label": "DDR5 Controller 3",
+          "interfaces": [
+            {
+              "id": "mc_if",
+              "name": "Memory Controller Interface",
+              "direction": "slave",
+              "dataWidth": 32
+            }
+          ],
+          "rank": 2,
+          "model_type": "Default Type",
+          "iconName": "Box",
+          "width": 160,
+          "height": 80,
+          "target_addr_base": "",
+          "target_addr_space": ""
+        },
+        "type": "dynamicNode",
+        "width": 160,
+        "height": 80
+      }
+    ],
+    "edges": [
+      {
+        "id": "e1",
+        "source": "cxl-controller",
+        "target": "crossbar",
+        "type": "smoothstep",
+        "animated": false,
+        "sourceHandle": "mc_port_0",
+        "targetHandle": "master_in"
+      },
+      {
+        "id": "e2",
+        "source": "crossbar",
+        "target": "ddr5-0",
+        "type": "smoothstep",
+        "animated": false,
+        "sourceHandle": "slave_out_0",
+        "targetHandle": "mc_if"
+      },
+      {
+        "id": "e3",
+        "source": "crossbar",
+        "target": "ddr5-1",
+        "type": "smoothstep",
+        "animated": false,
+        "sourceHandle": "slave_out_1",
+        "targetHandle": "mc_if"
+      },
+      {
+        "id": "e4",
+        "source": "crossbar",
+        "target": "ddr5-2",
+        "type": "smoothstep",
+        "animated": false,
+        "sourceHandle": "slave_out_2",
+        "targetHandle": "mc_if"
+      },
+      {
+        "id": "e5",
+        "source": "crossbar",
+        "target": "ddr5-3",
+        "type": "smoothstep",
+        "animated": false,
+        "sourceHandle": "slave_out_3",
+        "targetHandle": "mc_if"
+      }
+    ],
+    "metadata": {
+      "generatedAt": "2025-10-22T20:50:47.517Z",
+      "lastModified": "2025-10-22T20:50:47.517Z",
+      "version": "1.0.0",
+      "source": "template"
+    }
+  },
+  "icon": "MemoryStick",
+  "category": "memory",
+  "updatedAt": "2025-10-22T20:50:47.520Z",
+  "updatedBy": "b8aa4930-e0cd-462c-889d-1fa4ab46bbed"
+}

@@ -1,0 +1,261 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://soc-pilot.com/schemas/architecture-diagram-ai.json",
+  "title": "SOC Architecture Diagram Schema for AI Generation",
+  "description": "Schema for arch_diagram.json output. This defines the structure AI must follow when generating architecture diagrams.",
+
+  "// CRITICAL - TOP-LEVEL STRUCTURE": "======================================",
+
+  "nodes": [
+    {
+      "id": "component-id",
+      "_constraint_id": "REQUIRED. Unique node ID in this diagram. Use kebab-case. Example: 'cpu-1', 'memory-controller-1', 'pcie-gen4'",
+
+      "type": "dynamicNode",
+      "_constraint_type": "REQUIRED. Always use 'dynamicNode' for component nodes. This is the ReactFlow node type.",
+
+      "position": {
+        "x": 400,
+        "y": 300,
+        "_constraint_position": "REQUIRED. Canvas coordinates in pixels. Origin (0,0) is top-left. Standard spacing: 150-200px horizontal, 150px vertical."
+      },
+
+      "data": {
+        "_constraint_data": "REQUIRED. Node data containing component information",
+
+        "label": "Component Name",
+        "_constraint_label": "REQUIRED. Display name for this instance. Example: 'ARM Cortex-A78', 'DDR5 Controller'",
+
+        "model_type": "CPU",
+        "_constraint_model_type": "REQUIRED. Component category. Valid: 'CPU', 'Memory', 'Interconnect', 'IO', 'Accelerator', 'Custom'",
+
+        "iconName": "Cpu",
+        "_constraint_iconName": "REQUIRED. Lucide icon name. Common: 'Cpu', 'Network', 'Database', 'Zap', 'Cable', 'HardDrive', 'Radio', 'Chip'",
+
+        "componentId": "arm-cortex-a78-001",
+        "_constraint_componentId": "REQUIRED. Reference to component in library (data/components/{componentId}.json). Must exist.",
+
+        "interfaces": [
+          {
+            "_constraint_interfaces": "REQUIRED. Array of interfaces from component definition. Must have at least one.",
+
+            "id": "axi-master",
+            "name": "AXI4 Master Interface",
+            "direction": "master",
+            "busType": "AXI4",
+            "dataWidth": 64,
+            "speed": "1.5 GHz",
+            "placement": "south",
+
+            "_note": "Copy from component library. dataWidth and speed are MANDATORY fields."
+          }
+        ],
+
+        "properties": {
+          "_constraint_properties": "REQUIRED. Component properties from library",
+
+          "power": {
+            "typical": "100 mW",
+            "peak": "200 mW"
+          },
+          "physical": {
+            "area": "0.8 mm²",
+            "technology": "7nm"
+          },
+          "defaultPathLatency": 10
+        },
+
+        "visualization": {
+          "icon": "Cpu",
+          "width": 200,
+          "height": 120,
+          "_constraint_visualization": "REQUIRED. Visual config. Default width: 200, height: 120. Connection handles auto-generated."
+        },
+
+        "createdAt": "2025-10-21T00:00:00.000Z",
+        "updatedAt": "2025-10-21T00:00:00.000Z"
+      },
+
+      "width": 200,
+      "_constraint_node_width": "REQUIRED. Must match data.visualization.width",
+
+      "height": 120,
+      "_constraint_node_height": "REQUIRED. Must match data.visualization.height"
+    }
+  ],
+  "_constraint_nodes": "REQUIRED. Array of component nodes. Must have at least ONE node in valid architecture.",
+
+  "edges": [
+    {
+      "id": "edge-1",
+      "_constraint_edge_id": "REQUIRED. Unique edge ID. Use descriptive format: 'e1', 'e2', or 'cpu-to-memory'",
+
+      "source": "node-1",
+      "_constraint_source": "REQUIRED. Source node ID (must match a node.id in nodes array)",
+
+      "target": "node-2",
+      "_constraint_target": "REQUIRED. Target node ID (must match a node.id in nodes array)",
+
+      "sourceHandle": "axi-master",
+      "_constraint_sourceHandle": "REQUIRED. Interface ID on source node (must match an interface.id in source node's data.interfaces)",
+
+      "targetHandle": "axi-slave",
+      "_constraint_targetHandle": "REQUIRED. Interface ID on target node (must match an interface.id in target node's data.interfaces)",
+
+      "type": "smoothstep",
+      "_constraint_edge_type": "REQUIRED. Valid: 'default', 'straight', 'step', 'smoothstep', 'simplebezier'. Recommended: 'smoothstep'",
+
+      "animated": false,
+      "_constraint_animated": "(optional) Animated flow effect. Default: false. Use true for data visualization.",
+
+      "label": "AXI4 Bus",
+      "_constraint_edge_label": "(optional) Label text on edge",
+
+      "data": {
+        "_constraint_edge_data": "(optional) Edge metadata. Protocol inferred from connected interfaces.",
+
+        "sourceInterface": "axi-master",
+        "targetInterface": "axi-slave",
+        "connectionType": "AXI4",
+        "bandwidth": "64 GB/s",
+        "protocol": "AXI4",
+        "validationStatus": "valid"
+      }
+    }
+  ],
+  "_constraint_edges": "REQUIRED (can be empty array). Array of connections between nodes.",
+
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1,
+    "_constraint_viewport": "(optional) Initial canvas view. Defaults: x=0, y=0, zoom=1"
+  },
+
+  "layout": {
+    "algorithm": "force",
+    "direction": "TB",
+    "spacing": {
+      "nodeSpacing": 150,
+      "rankSpacing": 200
+    },
+    "_constraint_layout": "(optional) Layout algorithm config. Default: force-directed layout"
+  },
+
+  "metadata": {
+    "generatedAt": "2025-10-21T00:00:00.000Z",
+    "version": "1.0",
+    "source": "conversation",
+    "_constraint_metadata": "(optional) Generation metadata for tracking"
+  },
+
+  "// AI GENERATION RULES": "======================================",
+  "_rule_1": "Each node MUST reference a valid componentId from the component library",
+  "_rule_2": "Node data.interfaces MUST match the interfaces defined in the referenced component",
+  "_rule_3": "Edge sourceHandle and targetHandle MUST match actual interface IDs in their respective nodes",
+  "_rule_4": "Interface compatibility: Only connect compatible busTypes (e.g., AXI4 master to AXI4 slave)",
+  "_rule_5": "Node positions should avoid overlap. Use grid layout with 150-200px spacing",
+  "_rule_6": "Node width/height must match data.visualization width/height",
+  "_rule_7": "All interface fields (especially dataWidth and speed) must be present",
+  "_rule_8": "Use ISO 8601 timestamps for createdAt, updatedAt, generatedAt",
+
+  "// MINIMAL VALID EXAMPLE": "======================================",
+  "_example_minimal": {
+    "nodes": [
+      {
+        "id": "cpu-1",
+        "type": "dynamicNode",
+        "position": { "x": 150, "y": 100 },
+        "data": {
+          "label": "ARM Cortex-A78",
+          "model_type": "CPU",
+          "iconName": "Cpu",
+          "componentId": "arm-cortex-a78-001",
+          "interfaces": [
+            {
+              "id": "axi-master",
+              "name": "AXI4 Master",
+              "direction": "master",
+              "busType": "AXI4",
+              "dataWidth": 128,
+              "speed": "2.4 GHz",
+              "placement": "south"
+            }
+          ],
+          "properties": {
+            "defaultPathLatency": 5,
+            "pathLatencies": []
+          },
+          "visualization": {
+            "icon": "Cpu",
+            "width": 200,
+            "height": 120
+          },
+          "createdAt": "2025-10-21T00:00:00.000Z",
+          "updatedAt": "2025-10-21T00:00:00.000Z"
+        },
+        "width": 200,
+        "height": 120
+      },
+      {
+        "id": "memory-1",
+        "type": "dynamicNode",
+        "position": { "x": 150, "y": 300 },
+        "data": {
+          "label": "DDR5 Controller",
+          "model_type": "Memory",
+          "iconName": "Database",
+          "componentId": "ddr5-controller-001",
+          "interfaces": [
+            {
+              "id": "axi-slave",
+              "name": "AXI4 Slave",
+              "direction": "slave",
+              "busType": "AXI4",
+              "dataWidth": 128,
+              "speed": "1.6 GHz",
+              "placement": "north"
+            }
+          ],
+          "properties": {
+            "defaultPathLatency": 10,
+            "pathLatencies": []
+          },
+          "visualization": {
+            "icon": "Database",
+            "width": 200,
+            "height": 120
+          },
+          "createdAt": "2025-10-21T00:00:00.000Z",
+          "updatedAt": "2025-10-21T00:00:00.000Z"
+        },
+        "width": 200,
+        "height": 120
+      }
+    ],
+    "edges": [
+      {
+        "id": "e1",
+        "source": "cpu-1",
+        "target": "memory-1",
+        "sourceHandle": "axi-master",
+        "targetHandle": "axi-slave",
+        "type": "smoothstep",
+        "animated": false,
+        "data": {
+          "sourceInterface": "axi-master",
+          "targetInterface": "axi-slave",
+          "connectionType": "AXI4",
+          "bandwidth": "25.6 GB/s",
+          "protocol": "AXI4",
+          "validationStatus": "valid"
+        }
+      }
+    ],
+    "metadata": {
+      "generatedAt": "2025-10-21T00:00:00.000Z",
+      "version": "1.0",
+      "source": "conversation"
+    }
+  }
+}

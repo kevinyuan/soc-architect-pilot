@@ -1,0 +1,84 @@
+{
+  "id": "arm-cortex-a78-001",
+  "name": "ARM Cortex-A78",
+  "category": "CPU",
+  "version": "1.0.0",
+  "createdAt": "2025-10-18T16:50:22.627Z",
+  "updatedAt": "2025-10-21T10:28:31.648Z",
+  "properties": {
+    "power": {
+      "typical": "1.5W",
+      "peak": "3.0W",
+      "idle": "100mW",
+      "voltage": "0.8V - 1.0V"
+    },
+    "physical": {
+      "area": "4.5 mm²",
+      "technology": "5nm",
+      "packageType": "BGA"
+    },
+    "interfaces": [
+      "AXI4",
+      "CHI",
+      "GIC"
+    ],
+    "protocols": [
+      "ARMv8.2-A",
+      "NEON",
+      "SVE"
+    ],
+    "defaultPathLatency": 5
+  },
+  "interfaces": [
+    {
+      "id": "axi4-master",
+      "name": "AXI4 Master",
+      "direction": "master",
+      "speed": "2.4 GHz",
+      "busType": "AXI4",
+      "dataWidth": 128,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "south"
+    },
+    {
+      "id": "chi-interface",
+      "name": "CHI Interface",
+      "direction": "master",
+      "busType": "AXI4",
+      "dataWidth": 256,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "south"
+    }
+  ],
+  "description": "High-performance 64-bit ARM Cortex-A78 processor for mobile and edge AI applications",
+  "tags": [
+    "ARM",
+    "Cortex-A78",
+    "64-bit",
+    "high-performance",
+    "AI",
+    "mobile"
+  ],
+  "vendor": "ARM Holdings",
+  "partNumber": "Cortex-A78",
+  "datasheet": "https://developer.arm.com/documentation/101754/latest",
+  "compatibility": [
+    "AXI4",
+    "CHI",
+    "GIC",
+    "ARMv8.2-A"
+  ],
+  "customizable": true,
+  "baseTemplate": "arm-cortex-a-series",
+  "visualization": {
+    "icon": "Cpu",
+    "width": 160,
+    "height": 100
+  },
+  "addressMapping": {
+    "baseAddress": "-",
+    "addressSpace": "-"
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://soc-pilot.com/schemas/component-ai.json",
+  "title": "SOC Component Schema for AI Generation",
+  "description": "Simplified component schema for AI generation. This defines the structure and constraints that AI must follow when generating components.",
+
+  "// CRITICAL - REQUIRED FIELDS": "All fields below are REQUIRED unless marked as (optional)",
+
+  "id": "component-unique-id-001",
+  "_constraint_id": "REQUIRED. Format: {type}-{name}-{version}. Example: 'pcie-gen4-x16-001', 'arm-cortex-a78-001'. Use kebab-case.",
+
+  "name": "Component Display Name",
+  "_constraint_name": "REQUIRED. Human-readable name. Example: 'PCIe Gen4 x16 Controller', 'ARM Cortex-A78'",
+
+  "category": "CPU",
+  "_constraint_category": "REQUIRED. Valid values ONLY: 'CPU', 'Memory', 'Interconnect', 'IO', 'Accelerator', 'Custom'. No other values allowed.",
+
+  "version": "1.0.0",
+  "_constraint_version": "REQUIRED. Semantic version format: MAJOR.MINOR.PATCH. Default: '1.0.0'",
+
+  "createdAt": "2025-10-21T00:00:00.000Z",
+  "_constraint_createdAt": "REQUIRED. ISO 8601 timestamp format: YYYY-MM-DDTHH:mm:ss.sssZ",
+
+  "updatedAt": "2025-10-21T00:00:00.000Z",
+  "_constraint_updatedAt": "REQUIRED. ISO 8601 timestamp format: YYYY-MM-DDTHH:mm:ss.sssZ. Same as createdAt for new components.",
+
+  "interfaces": [
+    {
+      "id": "interface-id-1",
+      "_constraint_id": "REQUIRED. Unique within component. Use kebab-case. Example: 'axi-master', 'pcie-lanes-out'",
+
+      "name": "Interface Display Name",
+      "_constraint_name": "REQUIRED. Example: 'AXI4 Master Interface', 'DDR4 Memory Channel'",
+
+      "direction": "master",
+      "_constraint_direction": "REQUIRED. Valid values: 'master', 'slave', 'master & slave', 'input', 'output', 'inout'. Choose based on interface type.",
+
+      "busType": "AXI4",
+      "_constraint_busType": "REQUIRED. Valid values: 'PCIe', 'DDR', 'AXI4', 'AXI4-Lite', 'AXI4-Stream', 'AHB', 'APB', 'GPIO', 'SPI', 'I2C', 'UART', 'Ethernet', 'WiFi', 'USB', 'CXL', 'Custom'",
+
+      "dataWidth": 64,
+      "_constraint_dataWidth": "REQUIRED (MUST NOT be omitted!). Data bus width in bits. Common values: 8, 16, 32, 64, 128, 256, 512. Default if unknown: 32",
+
+      "speed": "1 GHz",
+      "_constraint_speed": "REQUIRED (MUST NOT be omitted!). Operating frequency or data rate. Default: '1 GHz'. Examples: '1.5 GHz', '16 GT/s', '10 Gbps', '3200 MT/s'",
+
+      "// OPTIONAL INTERFACE FIELDS": "Fields below are optional",
+
+      "addrWidth": 32,
+      "_constraint_addrWidth": "(optional) Address bus width in bits. Only for memory-mapped interfaces. Common: 32, 40, 64",
+
+      "idWidth": 4,
+      "_constraint_idWidth": "(optional) ID width for AXI/similar protocols. Common: 4, 6, 8",
+
+      "placement": "north",
+      "_constraint_placement": "(optional) Visual placement. Valid: 'north', 'south', 'east', 'west'. Default: auto-assigned",
+
+      "voltage": "1.8V",
+      "_constraint_voltage": "(optional) Operating voltage. Example: '1.8V', '3.3V', '0.9V'",
+
+      "optional": false,
+      "_constraint_optional": "(optional) Whether interface can be disabled. Default: false"
+    }
+  ],
+  "_constraint_interfaces": "REQUIRED. Array with at least ONE interface. Each component MUST have at least one connection point.",
+
+  "// OPTIONAL COMPONENT FIELDS": "Fields below improve quality but are optional",
+
+  "description": "Detailed component description",
+  "_constraint_description": "(optional but recommended) Describe functionality, use cases, key features",
+
+  "properties": {
+    "power": {
+      "typical": "2.5W",
+      "peak": "4.0W",
+      "idle": "0.5W",
+      "voltage": "0.9V"
+    },
+    "physical": {
+      "area": "12 mm²",
+      "technology": "7nm",
+      "packageType": "BGA"
+    },
+    "performance": {
+      "clockFrequency": "1.5 GHz",
+      "throughput": "32 GB/s"
+    },
+    "defaultPathLatency": 3,
+
+    "pathLatencies": [
+      {
+        "pathId": "path-1",
+        "from": "interface-id-1",
+        "to": "interface-id-2",
+        "latencyTypical": 5,
+        "latencyMin": 3,
+        "latencyMax": 8
+      }
+    ]
+  },
+  "_constraint_properties": "(optional) Physical/electrical characteristics. Include if specified by user or inferred from component type.",
+  "_constraint_pathLatencies": "(optional) Specific path latencies between interfaces. For n inputs and m outputs, there are n*m paths. Only specify if user provides specific path requirements. If not specified, defaultPathLatency is used.",
+
+  "visualization": {
+    "icon": "Network",
+    "width": 200,
+    "height": 120
+  },
+  "_constraint_visualization": "(optional) Visual config. Common icons: 'Cpu', 'Network', 'Database', 'Zap', 'Cable', 'HardDrive', 'Radio', 'Chip'. Default width: 200, height: 120",
+
+  "tags": ["tag1", "tag2", "high-speed"],
+  "_constraint_tags": "(optional) Searchable tags. Use lowercase kebab-case.",
+
+  "vendor": "Synopsys",
+  "_constraint_vendor": "(optional) IP provider. Example: 'ARM', 'Synopsys', 'Cadence'",
+
+  "partNumber": "DesignWare PCIe 4.0",
+  "_constraint_partNumber": "(optional) Manufacturer part/model name",
+
+  "compatibility": ["Standard 1", "Protocol A"],
+  "_constraint_compatibility": "(optional) Compatible standards/protocols",
+
+  "customizable": true,
+  "_constraint_customizable": "(optional) Whether user can parameterize. Default: false",
+
+  "// AI GENERATION RULES": "======================================",
+  "_rule_1": "NEVER omit 'dataWidth' and 'speed' from interfaces - these are MANDATORY",
+  "_rule_2": "Use current timestamp for 'createdAt' and 'updatedAt'",
+  "_rule_3": "Ensure 'category' matches one of the 6 valid values exactly (case-sensitive)",
+  "_rule_4": "Generate unique 'id' in kebab-case format",
+  "_rule_5": "Each component MUST have at least one interface in 'interfaces' array",
+  "_rule_6": "For 'busType', choose from the predefined list - don't invent new types",
+  "_rule_7": "Interface 'direction' should match hardware design patterns: master/slave for buses, input/output for signals",
+
+  "// COMPLETE EXAMPLE": "======================================",
+  "_example": {
+    "id": "arm-cortex-a78-001",
+    "name": "ARM Cortex-A78",
+    "category": "CPU",
+    "version": "1.0.0",
+    "createdAt": "2025-10-21T00:00:00.000Z",
+    "updatedAt": "2025-10-21T00:00:00.000Z",
+    "description": "High-performance 64-bit ARMv8-A CPU core with out-of-order execution",
+    "interfaces": [
+      {
+        "id": "axi4-master",
+        "name": "AXI4 Master Interface",
+        "direction": "master",
+        "busType": "AXI4",
+        "dataWidth": 128,
+        "speed": "2.4 GHz",
+        "addrWidth": 40,
+        "idWidth": 6,
+        "placement": "south"
+      }
+    ],
+    "properties": {
+      "performance": {
+        "clockFrequency": "2.4 GHz",
+        "throughput": "9600 DMIPS"
+      },
+      "power": {
+        "typical": "1.5W",
+        "peak": "3.0W",
+        "idle": "100mW"
+      },
+      "physical": {
+        "area": "4.5 mm²",
+        "technology": "7nm"
+      }
+    },
+    "visualization": {
+      "icon": "Cpu",
+      "width": 200,
+      "height": 120
+    },
+    "tags": ["ARM", "Cortex-A78", "64-bit", "high-performance"],
+    "vendor": "ARM",
+    "compatibility": ["AXI4", "ACE", "CHI"],
+    "customizable": true
+  }
+}

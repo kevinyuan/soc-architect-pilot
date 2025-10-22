@@ -1,0 +1,78 @@
+{
+  "id": "arm-cortex-m4-001",
+  "name": "ARM Cortex-M4",
+  "category": "CPU",
+  "version": "1.0.0",
+  "createdAt": "2025-10-18T00:00:00.000Z",
+  "updatedAt": "2025-10-21T10:28:31.648Z",
+  "properties": {
+    "power": {
+      "typical": "50 mW",
+      "peak": "80 mW",
+      "idle": "5 mW",
+      "voltage": "1.8V - 3.6V"
+    },
+    "physical": {
+      "area": "0.25 mm²",
+      "technology": "40nm",
+      "packageType": "LQFP64"
+    },
+    "defaultPathLatency": 5
+  },
+  "interfaces": [
+    {
+      "id": "ahb-data-master",
+      "name": "AHB Data Master",
+      "direction": "master",
+      "busType": "AXI4",
+      "dataWidth": 32,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "speed": "168 MHz",
+      "placement": "south"
+    },
+    {
+      "id": "ahb-instr-master",
+      "name": "AHB Instruction Master",
+      "direction": "master",
+      "busType": "AXI4",
+      "dataWidth": 32,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "speed": "168 MHz",
+      "placement": "south"
+    }
+  ],
+  "visualization": {
+    "icon": "Cpu",
+    "width": 180,
+    "height": 100
+  },
+  "addressMapping": {
+    "baseAddress": "0x00000000",
+    "addressSpace": "512KB"
+  },
+  "description": "32-bit ARM Cortex-M4 processor with DSP and FPU capabilities, optimized for IoT and embedded applications",
+  "tags": [
+    "ARM",
+    "Cortex-M4",
+    "32-bit",
+    "DSP",
+    "FPU",
+    "IoT",
+    "embedded",
+    "microcontroller"
+  ],
+  "vendor": "ARM Holdings",
+  "partNumber": "Cortex-M4",
+  "datasheet": "https://developer.arm.com/documentation/ddi0439/latest",
+  "compatibility": [
+    "AXI4",
+    "APB",
+    "NVIC",
+    "SysTick",
+    "ARM-Thumb2"
+  ],
+  "customizable": true,
+  "baseTemplate": "arm-cortex-m-series"
+}

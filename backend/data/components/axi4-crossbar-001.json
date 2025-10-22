@@ -1,0 +1,140 @@
+{
+  "id": "axi4-crossbar-001",
+  "name": "AXI4 Crossbar 4x4",
+  "category": "Interconnect",
+  "version": "1.0.0",
+  "createdAt": "2025-10-18T00:00:00.000Z",
+  "updatedAt": "2025-10-21T10:28:31.648Z",
+  "properties": {
+    "power": {
+      "typical": "150 mW",
+      "peak": "250 mW",
+      "idle": "50 mW",
+      "voltage": "1.0V"
+    },
+    "physical": {
+      "area": "0.5 mm²",
+      "technology": "28nm",
+      "packageType": "IP Core"
+    },
+    "defaultPathLatency": 3
+  },
+  "interfaces": [
+    {
+      "id": "slave-input-0",
+      "name": "Slave Input 0 (from Masters)",
+      "direction": "slave",
+      "busType": "AXI4",
+      "dataWidth": 128,
+      "addrWidth": 32,
+      "idWidth": 8,
+      "speed": "500 MHz",
+      "placement": "north"
+    },
+    {
+      "id": "slave-input-1",
+      "name": "Slave Input 1 (from Masters)",
+      "direction": "slave",
+      "busType": "AXI4",
+      "dataWidth": 128,
+      "addrWidth": 32,
+      "idWidth": 8,
+      "speed": "500 MHz",
+      "placement": "north"
+    },
+    {
+      "id": "slave-input-2",
+      "name": "Slave Input 2 (from Masters)",
+      "direction": "slave",
+      "busType": "AXI4",
+      "dataWidth": 128,
+      "addrWidth": 32,
+      "idWidth": 8,
+      "speed": "500 MHz",
+      "placement": "north"
+    },
+    {
+      "id": "slave-input-3",
+      "name": "Slave Input 3 (from Masters)",
+      "direction": "slave",
+      "busType": "AXI4",
+      "dataWidth": 128,
+      "addrWidth": 32,
+      "idWidth": 8,
+      "speed": "500 MHz",
+      "placement": "north"
+    },
+    {
+      "id": "master-output-0",
+      "name": "Master Output 0 (to Slaves)",
+      "direction": "master",
+      "busType": "AXI4",
+      "dataWidth": 128,
+      "addrWidth": 32,
+      "idWidth": 8,
+      "speed": "500 MHz",
+      "placement": "south"
+    },
+    {
+      "id": "master-output-1",
+      "name": "Master Output 1 (to Slaves)",
+      "direction": "master",
+      "busType": "AXI4",
+      "dataWidth": 128,
+      "addrWidth": 32,
+      "idWidth": 8,
+      "speed": "500 MHz",
+      "placement": "south"
+    },
+    {
+      "id": "master-output-2",
+      "name": "Master Output 2 (to Slaves)",
+      "direction": "master",
+      "busType": "AXI4",
+      "dataWidth": 128,
+      "addrWidth": 32,
+      "idWidth": 8,
+      "speed": "500 MHz",
+      "placement": "south"
+    },
+    {
+      "id": "master-output-3",
+      "name": "Master Output 3 (to Slaves)",
+      "direction": "master",
+      "busType": "AXI4",
+      "dataWidth": 128,
+      "addrWidth": 32,
+      "idWidth": 8,
+      "speed": "500 MHz",
+      "placement": "south"
+    }
+  ],
+  "visualization": {
+    "icon": "Network",
+    "width": 200,
+    "height": 150
+  },
+  "addressMapping": {
+    "baseAddress": "",
+    "addressSpace": ""
+  },
+  "description": "4x4 AXI4 crossbar interconnect supporting full crossbar connectivity with arbitration and address decoding",
+  "tags": [
+    "AXI4",
+    "crossbar",
+    "interconnect",
+    "4x4",
+    "arbiter",
+    "NoC"
+  ],
+  "vendor": "ARM",
+  "partNumber": "NIC-400",
+  "datasheet": "https://developer.arm.com/ip-products/system-ip/amba-interconnect",
+  "compatibility": [
+    "AXI4",
+    "AXI3",
+    "AXI4-Lite"
+  ],
+  "customizable": true,
+  "baseTemplate": "axi-crossbar"
+}

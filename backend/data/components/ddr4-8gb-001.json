@@ -1,0 +1,64 @@
+{
+  "id": "ddr4-8gb-001",
+  "name": "DDR4-3200 8GB Controller",
+  "category": "Memory",
+  "version": "1.0.0",
+  "createdAt": "2025-10-18T00:00:00.000Z",
+  "updatedAt": "2025-10-21T10:28:31.648Z",
+  "properties": {
+    "power": {
+      "typical": "1.2W",
+      "peak": "2.5W",
+      "idle": "0.8W",
+      "voltage": "1.2V"
+    },
+    "physical": {
+      "area": "31.25 mm × 133.35 mm",
+      "technology": "20nm",
+      "packageType": "DIMM"
+    },
+    "defaultPathLatency": 50
+  },
+  "interfaces": [
+    {
+      "id": "axi-slave",
+      "name": "AXI4 Slave Interface",
+      "direction": "slave",
+      "busType": "AXI4",
+      "dataWidth": 64,
+      "addrWidth": 32,
+      "idWidth": 8,
+      "speed": "1600 MHz",
+      "placement": "north"
+    }
+  ],
+  "visualization": {
+    "icon": "MemoryStick",
+    "width": 180,
+    "height": 100
+  },
+  "addressMapping": {
+    "baseAddress": "0x80000000",
+    "addressSpace": "8GB"
+  },
+  "description": "High-performance DDR4 SDRAM controller with 8GB capacity and 3200 MT/s data rate",
+  "tags": [
+    "DDR4",
+    "DRAM",
+    "8GB",
+    "3200MT/s",
+    "memory",
+    "high-performance",
+    "controller"
+  ],
+  "vendor": "Samsung",
+  "partNumber": "M378A1K43CB2-CRC",
+  "datasheet": "https://semiconductor.samsung.com/dram/ddr/ddr4/",
+  "compatibility": [
+    "AXI4",
+    "DDR4",
+    "JEDEC"
+  ],
+  "customizable": true,
+  "baseTemplate": "ddr4-controller"
+}

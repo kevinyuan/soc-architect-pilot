@@ -1,0 +1,58 @@
+{
+  "id": "sram-512kb-001",
+  "name": "512KB SRAM",
+  "category": "Memory",
+  "version": "1.0.0",
+  "createdAt": "2025-10-18T16:50:22.631Z",
+  "updatedAt": "2025-10-21T10:28:31.648Z",
+  "properties": {
+    "power": {
+      "typical": "100mW",
+      "peak": "200mW",
+      "idle": "10mW",
+      "voltage": "1.8V"
+    },
+    "physical": {
+      "area": "8 mm²",
+      "technology": "28nm",
+      "packageType": "Embedded"
+    },
+    "defaultPathLatency": 50
+  },
+  "interfaces": [
+    {
+      "id": "ahb-slave",
+      "name": "AHB Slave Interface",
+      "direction": "slave",
+      "speed": "200 MHz",
+      "dataWidth": 32,
+      "busType": "AHB",
+      "placement": "north"
+    }
+  ],
+  "description": "High-speed SRAM for cache and buffer applications with ultra-low latency",
+  "tags": [
+    "SRAM",
+    "cache",
+    "512KB",
+    "low-latency",
+    "embedded"
+  ],
+  "vendor": "ARM",
+  "partNumber": "PL354",
+  "compatibility": [
+    "AHB",
+    "APB"
+  ],
+  "customizable": true,
+  "baseTemplate": "sram-base",
+  "visualization": {
+    "icon": "MemoryStick",
+    "width": 160,
+    "height": 100
+  },
+  "addressMapping": {
+    "baseAddress": "1MB",
+    "addressSpace": "0x80000000"
+  }
+}

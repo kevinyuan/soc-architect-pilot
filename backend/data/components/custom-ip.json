@@ -1,0 +1,43 @@
+{
+  "id": "custom-ip-001",
+  "name": "Custom IP Core",
+  "version": "1.0.0",
+  "createdAt": "2025-10-21T10:28:31.648Z",
+  "updatedAt": "2025-10-21T10:28:31.648Z",
+  "type": "custom-ip",
+  "manufacturer": "Custom",
+  "description": "Generic custom IP core with AXI4 interfaces",
+  "tags": [
+    "custom",
+    "ip-core"
+  ],
+  "interfaces": [
+    {
+      "id": "axi4_input",
+      "name": "AXI4 Input",
+      "busType": "AXI4",
+      "dataWidth": 64,
+      "addressWidth": 32
+    },
+    {
+      "id": "axi4_output",
+      "name": "AXI4 Output",
+      "busType": "AXI4",
+      "dataWidth": 64,
+      "addressWidth": 32
+    }
+  ],
+  "properties": {
+    "physical": {
+      "area": 0.5,
+      "process": "7nm"
+    },
+    "power": {
+      "typical": 50,
+      "maximum": 100
+    },
+    "performance": {
+      "clockFrequency": 1000
+    }
+  }
+}

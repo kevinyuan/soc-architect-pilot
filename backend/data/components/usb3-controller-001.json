@@ -1,0 +1,69 @@
+{
+  "id": "usb3-controller-001",
+  "name": "USB 3.2 Controller",
+  "category": "IO",
+  "version": "1.0.0",
+  "createdAt": "2025-10-18T16:50:22.631Z",
+  "updatedAt": "2025-10-21T10:28:31.648Z",
+  "properties": {
+    "power": {
+      "typical": "500mW",
+      "peak": "1W",
+      "idle": "50mW",
+      "voltage": "3.3V"
+    },
+    "physical": {
+      "area": "8 mm²",
+      "technology": "28nm",
+      "packageType": "QFN"
+    },
+    "defaultPathLatency": 10
+  },
+  "interfaces": [
+    {
+      "id": "pcie-interface",
+      "name": "PCIe x2 Interface",
+      "direction": "master",
+      "speed": "8 GT/s",
+      "busType": "AXI4",
+      "dataWidth": 2,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "south"
+    },
+    {
+      "id": "usb-ports",
+      "name": "USB 3.2 Ports",
+      "direction": "master",
+      "speed": "10 Gbps",
+      "dataWidth": 4,
+      "busType": "USB",
+      "placement": "south"
+    }
+  ],
+  "description": "USB 3.2 Gen 2 controller supporting up to 4 ports with 10 Gbps per port",
+  "tags": [
+    "USB",
+    "3.2",
+    "Gen2",
+    "10Gbps",
+    "multi-port"
+  ],
+  "vendor": "ASMedia",
+  "partNumber": "ASM3142",
+  "compatibility": [
+    "PCIe",
+    "USB 3.2",
+    "USB-C"
+  ],
+  "customizable": false,
+  "visualization": {
+    "icon": "Usb",
+    "width": 160,
+    "height": 100
+  },
+  "addressMapping": {
+    "baseAddress": "1MB",
+    "addressSpace": "0x80000000"
+  }
+}

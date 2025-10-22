@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://soc-pilot.com/schemas/diagram-template.json",
+  "title": "SOC Architecture Diagram Template",
+  "description": "Golden template for design/architecture template definition. Use this as reference when creating new architecture templates for the template library.",
+  "// REQUIRED FIELDS": "======================================",
+  "id": "template-unique-id",
+  "_comment_id": "Unique identifier for this template (kebab-case). Format: {name}-template. Example: 'smartnic-template', 'minimal-soc-template'",
+  "name": "Template Display Name",
+  "_comment_name": "Human-readable name shown in UI. Example: 'SmartNIC', 'Minimal SoC', 'ML Processor'",
+  "description": "Brief description of this architecture template, its use case, and key components included.",
+  "_comment_description": "Short summary (1-2 sentences) describing what this template is for and what it contains.",
+  "createdAt": "2025-10-21T00:00:00.000Z",
+  "_comment_createdAt": "ISO 8601 timestamp of creation. Required for all templates.",
+  "diagram": {
+    "_comment_diagram": "The actual architecture diagram structure with nodes and edges",
+    "nodes": [
+      {
+        "id": "node-1",
+        "_comment_id": "Unique node ID within this diagram. Example: 'cpu-1', 'memory-1', 'pcie-controller'",
+        "type": "dynamicNode",
+        "_comment_type": "Node type for ReactFlow. Always use 'dynamicNode' for component nodes.",
+        "position": {
+          "x": 150,
+          "y": 100,
+          "_comment_position": "Canvas position in pixels. Origin (0,0) is top-left. Standard spacing: 150px horizontal, 150px vertical between nodes."
+        },
+        "data": {
+          "_comment_data": "Node data object containing component information",
+          "label": "Component Label",
+          "_comment_label": "Display label for this node instance. Example: 'ARM Cortex-A53', 'DDR4 Memory'",
+          "model_type": "CPU",
+          "_comment_model_type": "Component category. Valid values: 'CPU', 'Memory', 'Interconnect', 'IO', 'Accelerator', 'Custom'",
+          "iconName": "Cpu",
+          "_comment_iconName": "Lucide icon name for this node. Common: 'Cpu', 'Network', 'Database', 'Zap', 'Cable', 'HardDrive'",
+          "componentId": "arm-cortex-a53-001",
+          "_comment_componentId": "Reference to component definition in component library (data/components/{componentId}.json). This component's interfaces and properties will be loaded.",
+          "interfaces": [
+            {
+              "_comment_interfaces": "Copy of component interfaces. When template is instantiated, these are enriched from component library.",
+              "id": "axi-master",
+              "name": "AXI4 Master Interface",
+              "direction": "master",
+              "busType": "AXI4",
+              "dataWidth": 64,
+              "addrWidth": 40,
+              "idWidth": 6,
+              "speed": "1.5 GHz",
+              "placement": "south"
+            }
+          ],
+          "properties": {
+            "_comment_properties": "Component properties. Copied from component library during instantiation.",
+            "power": {
+              "typical": "100 mW/core",
+              "peak": "200 mW/core",
+              "idle": "10 mW/core",
+              "voltage": "0.8V - 1.0V"
+            },
+            "physical": {
+              "area": "0.8 mm²/core",
+              "technology": "28nm",
+              "packageType": "IP Core"
+            },
+            "defaultPathLatency": 10,
+            "pathLatencies": [
+              {
+                "pathId": "path-1",
+                "from": "axi-master",
+                "to": "axi-slave",
+                "latencyTypical": 12,
+                "latencyMin": 8,
+                "latencyMax": 15
+              }
+            ]
+          },
+          "visualization": {
+            "icon": "Cpu",
+            "width": 200,
+            "height": 120,
+            "_comment_visualization": "Visual configuration. Connection handles are auto-generated from interface placement. customHandles has been deprecated."
+          },
+          "createdAt": "2025-10-21T00:00:00.000Z",
+          "updatedAt": "2025-10-21T00:00:00.000Z"
+        },
+        "width": 200,
+        "_comment_node_width": "Node width on canvas. Should match data.visualization.width",
+        "height": 120,
+        "_comment_node_height": "Node height on canvas. Should match data.visualization.height"
+      }
+    ],
+    "_comment_nodes": "Array of component nodes in this architecture. Each node represents a component instance on the canvas.",
+    "edges": [
+      {
+        "id": "edge-1",
+        "_comment_edge_id": "Unique edge ID within this diagram. Format: 'e1', 'e2', or descriptive like 'cpu-to-memory'",
+        "source": "node-1",
+        "_comment_source": "Source node ID (must match a node.id in the nodes array)",
+        "target": "node-2",
+        "_comment_target": "Target node ID (must match a node.id in the nodes array)",
+        "sourceHandle": "axi-master",
+        "_comment_sourceHandle": "Interface ID on source node (must match an interface.id in source node's interfaces)",
+        "targetHandle": "axi-slave",
+        "_comment_targetHandle": "Interface ID on target node (must match an interface.id in target node's interfaces)",
+        "type": "smoothstep",
+        "_comment_edge_type": "Edge rendering style. Valid values: 'default', 'straight', 'step', 'smoothstep', 'simplebezier'. Recommended: 'smoothstep'",
+        "animated": false,
+        "_comment_animated": "Whether edge should have animated flowing effect. Default: false. Use true for data flow visualization.",
+        "label": "AXI4 Bus",
+        "_comment_edge_label": "Optional: Label text displayed on the edge",
+        "data": {
+          "_comment_edge_data": "Optional: Additional edge metadata (protocol is inferred from connected interface busTypes)",
+          "bandwidth": "64 GB/s",
+          "_comment_bandwidth": "Data bandwidth/throughput"
+        }
+      }
+    ],
+    "_comment_edges": "Array of connections between nodes. Each edge represents a bus/interface connection.",
+    "viewport": {
+      "_comment_viewport": "Optional: Initial viewport settings for canvas",
+      "x": 0,
+      "_comment_viewport_x": "Horizontal pan offset. Default: 0",
+      "y": 0,
+      "_comment_viewport_y": "Vertical pan offset. Default: 0",
+      "zoom": 1,
+      "_comment_viewport_zoom": "Zoom level. Default: 1 (100%). Range: 0.1 to 2"
+    }
+  },
+  "// OPTIONAL TEMPLATE FIELDS": "======================================",
+  "icon": "Network",
+  "_comment_icon": "Icon for template in template selection UI. Lucide icon name.",
+  "category": "networking",
+  "_comment_category": "Template category for filtering. Examples: 'networking', 'soc', 'ai', 'memory', 'storage', 'general'",
+  "createdBy": "system",
+  "_comment_createdBy": "Creator identifier. Examples: 'system', 'admin', user email",
+  "metadata": {
+    "_comment_metadata": "Template metadata for indexing and search",
+    "nodeCount": 5,
+    "_comment_nodeCount": "Number of nodes in diagram. Auto-calculated if not provided.",
+    "edgeCount": 4,
+    "_comment_edgeCount": "Number of edges in diagram. Auto-calculated if not provided.",
+    "tags": [
+      "networking",
+      "high-performance",
+      "smartnic"
+    ],
+    "_comment_tags": "Searchable tags for this template",
+    "difficulty": "intermediate",
+    "_comment_difficulty": "Complexity level. Values: 'beginner', 'intermediate', 'advanced'",
+    "estimatedArea": "50 mm²",
+    "_comment_estimatedArea": "Estimated total silicon area",
+    "estimatedPower": "15W",
+    "_comment_estimatedPower": "Estimated total power consumption",
+    "targetTechnology": "7nm",
+    "_comment_targetTechnology": "Target process technology node"
+  },
+  "// USAGE NOTES": "======================================",
+  "_usage_note_1": "This template shows ALL possible fields. Required fields are: 'id', 'name', 'description', 'createdAt', 'diagram' (with nodes).",
+  "_usage_note_2": "All fields starting with '_comment_' or '//' are for documentation only and should be removed in actual template files.",
+  "_usage_note_3": "When template is instantiated (/api/templates/:id/instantiate), node data is enriched with full component information from component library.",
+  "_usage_note_4": "componentId must reference existing components in data/components/",
+  "_usage_note_5": "Connection handles are auto-generated from interface placement. customHandles has been deprecated.",
+  "_usage_note_6": "Save template files to data/design_examples/{template-id}.json",
+  "_usage_note_7": "After adding a new template, restart the server to reload the template library",
+  "_usage_note_8": "Node positioning: Use grid layout with 150-200px spacing. Origin (0,0) is top-left corner.",
+  "_usage_note_9": "Edge connections: sourceHandle and targetHandle must match actual interface IDs on the respective nodes.",
+  "_usage_note_10": "Timestamps (createdAt) must be in ISO 8601 format: YYYY-MM-DDTHH:mm:ss.sssZ"
+}

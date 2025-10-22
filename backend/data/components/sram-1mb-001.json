@@ -1,0 +1,61 @@
+{
+  "id": "sram-1mb-001",
+  "name": "SRAM 1MB Controller",
+  "category": "Memory",
+  "version": "1.0.0",
+  "createdAt": "2025-10-18T00:00:00.000Z",
+  "updatedAt": "2025-10-21T10:28:31.648Z",
+  "properties": {
+    "power": {
+      "typical": "50 mW",
+      "peak": "100 mW",
+      "idle": "10 mW",
+      "voltage": "1.0V"
+    },
+    "physical": {
+      "area": "2 mm²",
+      "technology": "28nm",
+      "packageType": "IP Core"
+    },
+    "defaultPathLatency": 50
+  },
+  "interfaces": [
+    {
+      "id": "axi-slave",
+      "name": "AXI4 Slave Interface",
+      "direction": "slave",
+      "busType": "AXI4",
+      "dataWidth": 64,
+      "addrWidth": 20,
+      "idWidth": 4,
+      "speed": "500 MHz",
+      "placement": "north"
+    }
+  ],
+  "visualization": {
+    "icon": "Database",
+    "width": 160,
+    "height": 100
+  },
+  "addressMapping": {
+    "baseAddress": "0x20000000",
+    "addressSpace": "1MB"
+  },
+  "description": "High-speed SRAM controller with 1MB capacity, providing single-cycle access for critical data and instructions",
+  "tags": [
+    "SRAM",
+    "1MB",
+    "cache",
+    "fast-memory",
+    "on-chip"
+  ],
+  "vendor": "Generic",
+  "partNumber": "SRAM-1MB-CTRL",
+  "datasheet": "",
+  "compatibility": [
+    "AXI4",
+    "AXI4-Lite"
+  ],
+  "customizable": true,
+  "baseTemplate": "sram-controller"
+}

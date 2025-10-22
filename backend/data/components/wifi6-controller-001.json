@@ -1,0 +1,70 @@
+{
+  "id": "wifi6-controller-001",
+  "name": "WiFi 6 Controller",
+  "category": "IO",
+  "version": "1.0.0",
+  "createdAt": "2025-10-18T16:50:22.631Z",
+  "updatedAt": "2025-10-21T10:28:31.648Z",
+  "properties": {
+    "power": {
+      "typical": "800mW",
+      "peak": "1.2W",
+      "idle": "50mW",
+      "voltage": "3.3V"
+    },
+    "physical": {
+      "area": "25 mm²",
+      "technology": "28nm",
+      "packageType": "QFN"
+    },
+    "defaultPathLatency": 10
+  },
+  "interfaces": [
+    {
+      "id": "pcie-interface",
+      "name": "PCIe Interface",
+      "direction": "master",
+      "speed": "8 GT/s",
+      "busType": "AXI4",
+      "dataWidth": 1,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "south"
+    },
+    {
+      "id": "rf-interface",
+      "name": "RF Interface",
+      "direction": "master",
+      "busType": "AXI4",
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "south"
+    }
+  ],
+  "description": "WiFi 6 (802.11ax) wireless controller with MIMO support and advanced power management",
+  "tags": [
+    "WiFi",
+    "802.11ax",
+    "wireless",
+    "MIMO",
+    "IoT",
+    "6GHz"
+  ],
+  "vendor": "Broadcom",
+  "partNumber": "BCM4389",
+  "compatibility": [
+    "PCIe",
+    "802.11ax",
+    "WPA3"
+  ],
+  "customizable": false,
+  "visualization": {
+    "icon": "Wifi",
+    "width": 160,
+    "height": 100
+  },
+  "addressMapping": {
+    "baseAddress": "1MB",
+    "addressSpace": "0x80000000"
+  }
+}

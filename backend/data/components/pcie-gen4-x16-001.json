@@ -1,0 +1,83 @@
+{
+  "id": "pcie-gen4-x16-001",
+  "name": "PCIe Gen4 x16 Controller",
+  "category": "Interconnect",
+  "version": "1.0.0",
+  "createdAt": "2025-10-18T00:00:00.000Z",
+  "updatedAt": "2025-10-21T10:28:31.648Z",
+  "properties": {
+    "power": {
+      "typical": "2.5W",
+      "peak": "4.0W",
+      "idle": "0.5W",
+      "voltage": "0.9V"
+    },
+    "physical": {
+      "area": "12 mm²",
+      "technology": "7nm",
+      "packageType": "BGA"
+    },
+    "defaultPathLatency": 3
+  },
+  "interfaces": [
+    {
+      "id": "pcie-lanes-out",
+      "name": "PCIe x16 Lanes Output",
+      "direction": "output",
+      "busType": "PCIe",
+      "speed": "16 GT/s",
+      "dataWidth": 16,
+      "placement": "south"
+    },
+    {
+      "id": "axi-master",
+      "name": "AXI4 Master Interface",
+      "direction": "master",
+      "busType": "AXI4",
+      "dataWidth": 128,
+      "addrWidth": 64,
+      "idWidth": 8,
+      "speed": "500 MHz",
+      "placement": "south"
+    },
+    {
+      "id": "axi-slave",
+      "name": "AXI4 Slave Interface",
+      "direction": "slave",
+      "busType": "AXI4",
+      "dataWidth": 128,
+      "addrWidth": 64,
+      "idWidth": 8,
+      "speed": "500 MHz",
+      "placement": "north"
+    }
+  ],
+  "visualization": {
+    "icon": "Network",
+    "width": 200,
+    "height": 120
+  },
+  "addressMapping": {
+    "baseAddress": "0xC0000000",
+    "addressSpace": "256MB"
+  },
+  "description": "High-speed PCIe Gen4 x16 controller supporting up to 32 GB/s bandwidth for connecting GPUs, NVMe SSDs, and other high-performance peripherals",
+  "tags": [
+    "PCIe",
+    "Gen4",
+    "x16",
+    "high-speed",
+    "controller"
+  ],
+  "vendor": "Synopsys",
+  "partNumber": "DesignWare PCIe 4.0",
+  "datasheet": "https://www.synopsys.com/dw/ipdir.php?ds=dwc_pcie",
+  "compatibility": [
+    "PCIe 4.0",
+    "PCIe 3.0",
+    "AXI4",
+    "AXI3"
+  ],
+  "customizable": true,
+  "baseTemplate": "pcie-controller-base"
+}

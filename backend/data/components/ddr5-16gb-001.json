@@ -1,0 +1,62 @@
+{
+  "id": "ddr5-16gb-001",
+  "name": "DDR5-4800 16GB",
+  "category": "Memory",
+  "version": "1.0.0",
+  "createdAt": "2025-10-18T16:50:22.629Z",
+  "updatedAt": "2025-10-21T10:28:31.648Z",
+  "properties": {
+    "power": {
+      "typical": "1.1W",
+      "peak": "2.2W",
+      "idle": "0.7W",
+      "voltage": "1.1V"
+    },
+    "physical": {
+      "area": "31.25 mm × 133.35 mm",
+      "technology": "10nm",
+      "packageType": "DIMM"
+    },
+    "defaultPathLatency": 50
+  },
+  "interfaces": [
+    {
+      "id": "ddr5-interface",
+      "name": "DDR5 Memory Interface",
+      "direction": "master",
+      "speed": "4800 MT/s",
+      "voltage": "1.1V",
+      "busType": "AXI4",
+      "dataWidth": 64,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "south"
+    }
+  ],
+  "description": "Next-generation DDR5 SDRAM with 16GB capacity and improved power efficiency",
+  "tags": [
+    "DDR5",
+    "DRAM",
+    "16GB",
+    "4800MT/s",
+    "memory",
+    "next-gen",
+    "power-efficient"
+  ],
+  "vendor": "SK Hynix",
+  "partNumber": "HMA82GU6DJR8N-XN",
+  "compatibility": [
+    "DDR5",
+    "JEDEC"
+  ],
+  "customizable": false,
+  "visualization": {
+    "icon": "MemoryStick",
+    "width": 160,
+    "height": 100
+  },
+  "addressMapping": {
+    "baseAddress": "1MB",
+    "addressSpace": "0x80000000"
+  }
+}

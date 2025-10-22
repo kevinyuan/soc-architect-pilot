@@ -1,0 +1,160 @@
+{
+  "id": "noc-mesh-001",
+  "name": "Mesh NoC Router",
+  "category": "Interconnect",
+  "version": "1.0.0",
+  "createdAt": "2025-10-18T16:50:22.630Z",
+  "updatedAt": "2025-10-21T10:28:31.648Z",
+  "properties": {
+    "power": {
+      "typical": "500mW",
+      "peak": "1W",
+      "idle": "100mW",
+      "voltage": "0.8V"
+    },
+    "physical": {
+      "area": "2 mm²",
+      "technology": "3nm",
+      "packageType": "Embedded"
+    },
+    "defaultPathLatency": 3
+  },
+  "interfaces": [
+    {
+      "id": "north-input",
+      "name": "North Input (Slave)",
+      "direction": "slave",
+      "speed": "2 GHz",
+      "busType": "AXI4",
+      "dataWidth": 512,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "north"
+    },
+    {
+      "id": "north-output",
+      "name": "North Output (Master)",
+      "direction": "master",
+      "speed": "2 GHz",
+      "busType": "AXI4",
+      "dataWidth": 512,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "south"
+    },
+    {
+      "id": "south-input",
+      "name": "South Input (Slave)",
+      "direction": "slave",
+      "speed": "2 GHz",
+      "busType": "AXI4",
+      "dataWidth": 512,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "north"
+    },
+    {
+      "id": "south-output",
+      "name": "South Output (Master)",
+      "direction": "master",
+      "speed": "2 GHz",
+      "busType": "AXI4",
+      "dataWidth": 512,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "south"
+    },
+    {
+      "id": "east-input",
+      "name": "East Input (Slave)",
+      "direction": "slave",
+      "speed": "2 GHz",
+      "busType": "AXI4",
+      "dataWidth": 512,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "north"
+    },
+    {
+      "id": "east-output",
+      "name": "East Output (Master)",
+      "direction": "master",
+      "speed": "2 GHz",
+      "busType": "AXI4",
+      "dataWidth": 512,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "south"
+    },
+    {
+      "id": "west-input",
+      "name": "West Input (Slave)",
+      "direction": "slave",
+      "speed": "2 GHz",
+      "busType": "AXI4",
+      "dataWidth": 512,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "north"
+    },
+    {
+      "id": "west-output",
+      "name": "West Output (Master)",
+      "direction": "master",
+      "speed": "2 GHz",
+      "busType": "AXI4",
+      "dataWidth": 512,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "south"
+    },
+    {
+      "id": "local-input",
+      "name": "Local Input (Slave)",
+      "direction": "slave",
+      "speed": "2 GHz",
+      "busType": "AXI4",
+      "dataWidth": 512,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "north"
+    },
+    {
+      "id": "local-output",
+      "name": "Local Output (Master)",
+      "direction": "master",
+      "speed": "2 GHz",
+      "busType": "AXI4",
+      "dataWidth": 512,
+      "addrWidth": 32,
+      "idWidth": 4,
+      "placement": "south"
+    }
+  ],
+  "description": "High-performance mesh Network-on-Chip router for many-core processors and SoCs",
+  "tags": [
+    "NoC",
+    "mesh",
+    "router",
+    "many-core",
+    "low-latency"
+  ],
+  "vendor": "Arteris",
+  "partNumber": "FlexNoC",
+  "compatibility": [
+    "AXI4",
+    "CHI",
+    "Custom-NoC"
+  ],
+  "customizable": true,
+  "baseTemplate": "noc-router-base",
+  "visualization": {
+    "icon": "Network",
+    "width": 500,
+    "height": 100
+  },
+  "addressMapping": {
+    "baseAddress": "-",
+    "addressSpace": "-"
+  }
+}

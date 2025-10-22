@@ -1,0 +1,76 @@
+{
+  "id": "arm-cortex-a53-001",
+  "name": "ARM Cortex-A53",
+  "category": "CPU",
+  "version": "1.0.0",
+  "createdAt": "2025-10-18T00:00:00.000Z",
+  "updatedAt": "2025-10-21T10:28:31.648Z",
+  "properties": {
+    "power": {
+      "typical": "100 mW/core",
+      "peak": "200 mW/core",
+      "idle": "10 mW/core",
+      "voltage": "0.8V - 1.0V"
+    },
+    "physical": {
+      "area": "0.8 mm²/core",
+      "technology": "28nm",
+      "packageType": "IP Core"
+    },
+    "defaultPathLatency": 5
+  },
+  "interfaces": [
+    {
+      "id": "axi-data-master",
+      "name": "AXI4 Data Master",
+      "direction": "master",
+      "busType": "AXI4",
+      "dataWidth": 64,
+      "addrWidth": 40,
+      "idWidth": 6,
+      "speed": "1.5 GHz",
+      "placement": "south"
+    },
+    {
+      "id": "axi-instr-master",
+      "name": "AXI4 Instruction Master",
+      "direction": "master",
+      "busType": "AXI4",
+      "dataWidth": 64,
+      "addrWidth": 40,
+      "idWidth": 6,
+      "speed": "1.5 GHz",
+      "placement": "south"
+    }
+  ],
+  "visualization": {
+    "icon": "Cpu",
+    "width": 200,
+    "height": 120
+  },
+  "addressMapping": {
+    "baseAddress": "0x00000000",
+    "addressSpace": "1TB"
+  },
+  "description": "64-bit ARM Cortex-A53 quad-core processor optimized for power efficiency and performance, supporting ARMv8-A architecture",
+  "tags": [
+    "ARM",
+    "Cortex-A53",
+    "64-bit",
+    "ARMv8-A",
+    "quad-core",
+    "application-processor"
+  ],
+  "vendor": "ARM Holdings",
+  "partNumber": "Cortex-A53",
+  "datasheet": "https://developer.arm.com/ip-products/processors/cortex-a/cortex-a53",
+  "compatibility": [
+    "AXI4",
+    "AXI3",
+    "ARMv8-A",
+    "NEON",
+    "TrustZone"
+  ],
+  "customizable": true,
+  "baseTemplate": "arm-cortex-a-series"
+}

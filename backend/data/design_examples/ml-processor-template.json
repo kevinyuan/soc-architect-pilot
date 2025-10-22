@@ -1,0 +1,346 @@
+{
+  "id": "ml-processor-template",
+  "name": "Machine Learning Processor",
+  "description": "ARM CPU with Tensor Cores and HBM memory",
+  "createdAt": "2025-10-19T01:17:03.211Z",
+  "diagram": {
+    "nodes": [
+      {
+        "id": "cpu-1",
+        "type": "dynamicNode",
+        "position": {
+          "x": 200,
+          "y": 100
+        },
+        "data": {
+          "label": "ARM Cortex-A53",
+          "model_type": "CPU",
+          "iconName": "Cpu",
+          "componentId": "arm-cortex-a53-001",
+          "interfaces": [
+            {
+              "id": "axi-data-master",
+              "name": "AXI4 Data Master",
+              "direction": "master",
+              "busType": "AXI4",
+              "dataWidth": 64,
+              "addrWidth": 40,
+              "idWidth": 6,
+              "speed": "1.5 GHz"
+            },
+            {
+              "id": "axi-instr-master",
+              "name": "AXI4 Instruction Master",
+              "direction": "master",
+              "busType": "AXI4",
+              "dataWidth": 64,
+              "addrWidth": 40,
+              "idWidth": 6,
+              "speed": "1.5 GHz"
+            },
+            {
+              "id": "axi-slave",
+              "name": "AXI4 Slave (Debug/Config)",
+              "direction": "slave",
+              "busType": "AXI4",
+              "dataWidth": 32,
+              "addrWidth": 32,
+              "idWidth": 4,
+              "speed": "750 MHz",
+              "optional": true
+            },
+            {
+              "id": "irq-in",
+              "name": "Interrupt Request Input",
+              "direction": "input",
+              "optional": true,
+              "dataWidth": 256,
+              "busType": "GPIO"
+            }
+          ],
+          "properties": {
+            "power": {
+              "typical": "100 mW/core",
+              "peak": "200 mW/core",
+              "idle": "10 mW/core",
+              "voltage": "0.8V - 1.0V"
+            },
+            "physical": {
+              "area": "0.8 mm²/core",
+              "technology": "28nm",
+              "packageType": "IP Core"
+            },
+            "defaultPathLatency": 10
+          },
+          "visualization": {
+            "icon": "Cpu",
+            "width": 200,
+            "height": 120
+          },
+          "createdAt": "2025-10-21T00:34:11.093Z",
+          "updatedAt": "2025-10-21T00:34:11.093Z"
+        },
+        "width": 200,
+        "height": 120
+      },
+      {
+        "id": "crossbar-1",
+        "type": "dynamicNode",
+        "position": {
+          "x": 200,
+          "y": 250
+        },
+        "data": {
+          "label": "AXI4 Crossbar",
+          "model_type": "Interconnect",
+          "iconName": "Network",
+          "componentId": "axi4-crossbar-001",
+          "interfaces": [
+            {
+              "id": "slave-input-0",
+              "name": "Slave Input 0 (from Masters)",
+              "direction": "slave",
+              "busType": "AXI4",
+              "dataWidth": 128,
+              "addrWidth": 32,
+              "idWidth": 8,
+              "speed": "500 MHz"
+            },
+            {
+              "id": "slave-input-1",
+              "name": "Slave Input 1 (from Masters)",
+              "direction": "slave",
+              "busType": "AXI4",
+              "dataWidth": 128,
+              "addrWidth": 32,
+              "idWidth": 8,
+              "speed": "500 MHz"
+            },
+            {
+              "id": "slave-input-2",
+              "name": "Slave Input 2 (from Masters)",
+              "direction": "slave",
+              "busType": "AXI4",
+              "dataWidth": 128,
+              "addrWidth": 32,
+              "idWidth": 8,
+              "speed": "500 MHz"
+            },
+            {
+              "id": "slave-input-3",
+              "name": "Slave Input 3 (from Masters)",
+              "direction": "slave",
+              "busType": "AXI4",
+              "dataWidth": 128,
+              "addrWidth": 32,
+              "idWidth": 8,
+              "speed": "500 MHz"
+            },
+            {
+              "id": "master-output-0",
+              "name": "Master Output 0 (to Slaves)",
+              "direction": "master",
+              "busType": "AXI4",
+              "dataWidth": 128,
+              "addrWidth": 32,
+              "idWidth": 8,
+              "speed": "500 MHz"
+            },
+            {
+              "id": "master-output-1",
+              "name": "Master Output 1 (to Slaves)",
+              "direction": "master",
+              "busType": "AXI4",
+              "dataWidth": 128,
+              "addrWidth": 32,
+              "idWidth": 8,
+              "speed": "500 MHz"
+            },
+            {
+              "id": "master-output-2",
+              "name": "Master Output 2 (to Slaves)",
+              "direction": "master",
+              "busType": "AXI4",
+              "dataWidth": 128,
+              "addrWidth": 32,
+              "idWidth": 8,
+              "speed": "500 MHz"
+            },
+            {
+              "id": "master-output-3",
+              "name": "Master Output 3 (to Slaves)",
+              "direction": "master",
+              "busType": "AXI4",
+              "dataWidth": 128,
+              "addrWidth": 32,
+              "idWidth": 8,
+              "speed": "500 MHz"
+            }
+          ],
+          "properties": {
+            "power": {
+              "typical": "150 mW",
+              "peak": "250 mW",
+              "idle": "50 mW",
+              "voltage": "1.0V"
+            },
+            "physical": {
+              "area": "0.5 mm²",
+              "technology": "28nm",
+              "packageType": "IP Core"
+            },
+            "defaultPathLatency": 10
+          },
+          "visualization": {
+            "icon": "Network",
+            "width": 200,
+            "height": 150
+          },
+          "createdAt": "2025-10-21T00:34:11.093Z",
+          "updatedAt": "2025-10-21T00:34:11.093Z"
+        },
+        "width": 200,
+        "height": 150
+      },
+      {
+        "id": "tensor-1",
+        "type": "dynamicNode",
+        "position": {
+          "x": 100,
+          "y": 400
+        },
+        "data": {
+          "label": "Tensor Cores",
+          "model_type": "Accelerator",
+          "iconName": "Zap",
+          "componentId": "ai-accelerator-001",
+          "interfaces": [
+            {
+              "id": "pcie-interface",
+              "name": "PCIe x16 Interface",
+              "direction": "master",
+              "speed": "16 GT/s",
+              "busType": "AXI4",
+              "dataWidth": 16,
+              "addrWidth": 32,
+              "idWidth": 4
+            },
+            {
+              "id": "hbm-interface",
+              "name": "HBM3 Interface",
+              "direction": "master",
+              "speed": "6.4 Gbps",
+              "busType": "AXI4",
+              "dataWidth": 1024,
+              "addrWidth": 32,
+              "idWidth": 4
+            }
+          ],
+          "properties": {
+            "power": {
+              "typical": "25W",
+              "peak": "40W",
+              "idle": "2W",
+              "voltage": "0.8V"
+            },
+            "physical": {
+              "area": "50 mm²",
+              "technology": "5nm",
+              "packageType": "BGA"
+            },
+            "defaultPathLatency": 10
+          },
+          "visualization": {
+            "icon": "Zap",
+            "width": 160,
+            "height": 100
+          },
+          "createdAt": "2025-10-21T00:34:11.093Z",
+          "updatedAt": "2025-10-21T00:34:11.093Z"
+        },
+        "width": 160,
+        "height": 100
+      },
+      {
+        "id": "hbm-1",
+        "type": "dynamicNode",
+        "position": {
+          "x": 300,
+          "y": 400
+        },
+        "data": {
+          "label": "HBM3 8GB",
+          "model_type": "Memory",
+          "iconName": "MemoryStick",
+          "componentId": "hbm3-8gb-001",
+          "interfaces": [
+            {
+              "id": "hbm3-interface",
+              "name": "HBM3 Interface",
+              "direction": "master",
+              "speed": "6.4 Gbps",
+              "busType": "AXI4",
+              "dataWidth": 1024,
+              "addrWidth": 32,
+              "idWidth": 4
+            }
+          ],
+          "properties": {
+            "power": {
+              "typical": "15W",
+              "peak": "25W",
+              "idle": "5W",
+              "voltage": "1.2V"
+            },
+            "physical": {
+              "area": "35 mm²",
+              "technology": "7nm",
+              "packageType": "2.5D"
+            },
+            "defaultPathLatency": 10
+          },
+          "visualization": {
+            "icon": "MemoryStick",
+            "width": 160,
+            "height": 100
+          },
+          "createdAt": "2025-10-21T00:34:11.093Z",
+          "updatedAt": "2025-10-21T00:34:11.093Z"
+        },
+        "width": 160,
+        "height": 100
+      }
+    ],
+    "edges": [
+      {
+        "id": "e1",
+        "source": "cpu-1",
+        "target": "crossbar-1",
+        "sourceHandle": "axi-data-master",
+        "targetHandle": "slave-port-0",
+        "type": "smoothstep",
+        "animated": false
+      },
+      {
+        "id": "e2",
+        "source": "crossbar-1",
+        "target": "tensor-1",
+        "sourceHandle": "master-port-0",
+        "targetHandle": "axi-slave",
+        "type": "smoothstep",
+        "animated": false
+      },
+      {
+        "id": "e3",
+        "source": "crossbar-1",
+        "target": "hbm-1",
+        "sourceHandle": "master-port-1",
+        "targetHandle": "axi-slave",
+        "type": "smoothstep",
+        "animated": false
+      }
+    ]
+  },
+  "icon": "Brain",
+  "category": "ai"
+}

@@ -1,0 +1,754 @@
+{
+  "id": "ethernet-switch-template",
+  "name": "8-Port Ethernet Switch",
+  "description": "ARM CPU with PCIe, Packet Processor, and 8x 100GE ports",
+  "createdAt": "2025-10-19T01:17:02.646Z",
+  "diagram": {
+    "nodes": [
+      {
+        "id": "cpu-1",
+        "type": "dynamicNode",
+        "position": {
+          "x": 300,
+          "y": 50
+        },
+        "data": {
+          "label": "ARM Cortex-A53",
+          "model_type": "CPU",
+          "iconName": "Cpu",
+          "componentId": "arm-cortex-a53-001",
+          "interfaces": [
+            {
+              "id": "axi-data-master",
+              "name": "AXI4 Data Master",
+              "direction": "master",
+              "busType": "AXI4",
+              "dataWidth": 64,
+              "addrWidth": 40,
+              "idWidth": 6,
+              "speed": "1.5 GHz"
+            },
+            {
+              "id": "axi-instr-master",
+              "name": "AXI4 Instruction Master",
+              "direction": "master",
+              "busType": "AXI4",
+              "dataWidth": 64,
+              "addrWidth": 40,
+              "idWidth": 6,
+              "speed": "1.5 GHz"
+            },
+            {
+              "id": "axi-slave",
+              "name": "AXI4 Slave (Debug/Config)",
+              "direction": "slave",
+              "busType": "AXI4",
+              "dataWidth": 32,
+              "addrWidth": 32,
+              "idWidth": 4,
+              "speed": "750 MHz",
+              "optional": true
+            },
+            {
+              "id": "irq-in",
+              "name": "Interrupt Request Input",
+              "direction": "input",
+              "optional": true,
+              "dataWidth": 256,
+              "busType": "GPIO"
+            }
+          ],
+          "properties": {
+            "power": {
+              "typical": "100 mW/core",
+              "peak": "200 mW/core",
+              "idle": "10 mW/core",
+              "voltage": "0.8V - 1.0V"
+            },
+            "physical": {
+              "area": "0.8 mm²/core",
+              "technology": "28nm",
+              "packageType": "IP Core"
+            },
+            "defaultPathLatency": 10
+          },
+          "visualization": {
+            "icon": "Cpu",
+            "width": 200,
+            "height": 120
+          },
+          "createdAt": "2025-10-21T00:34:10.176Z",
+          "updatedAt": "2025-10-21T00:34:10.176Z"
+        },
+        "width": 200,
+        "height": 120
+      },
+      {
+        "id": "pcie-1",
+        "type": "dynamicNode",
+        "position": {
+          "x": 300,
+          "y": 150
+        },
+        "data": {
+          "label": "PCIe Gen4 x16",
+          "model_type": "Interconnect",
+          "iconName": "Network",
+          "componentId": "pcie-gen4-x16-001",
+          "interfaces": [
+            {
+              "id": "pcie-lanes-out",
+              "name": "PCIe x16 Lanes Output",
+              "direction": "output",
+              "busType": "PCIe",
+              "speed": "16 GT/s",
+              "dataWidth": 16
+            },
+            {
+              "id": "axi-master",
+              "name": "AXI4 Master Interface",
+              "direction": "master",
+              "busType": "AXI4",
+              "dataWidth": 128,
+              "addrWidth": 64,
+              "idWidth": 8,
+              "speed": "500 MHz"
+            },
+            {
+              "id": "axi-slave",
+              "name": "AXI4 Slave Interface",
+              "direction": "slave",
+              "busType": "AXI4",
+              "dataWidth": 128,
+              "addrWidth": 64,
+              "idWidth": 8,
+              "speed": "500 MHz"
+            }
+          ],
+          "properties": {
+            "power": {
+              "typical": "2.5W",
+              "peak": "4.0W",
+              "idle": "0.5W",
+              "voltage": "0.9V"
+            },
+            "physical": {
+              "area": "12 mm²",
+              "technology": "7nm",
+              "packageType": "BGA"
+            },
+            "defaultPathLatency": 10
+          },
+          "visualization": {
+            "icon": "Network",
+            "width": 200,
+            "height": 120
+          },
+          "createdAt": "2025-10-21T00:34:10.176Z",
+          "updatedAt": "2025-10-21T00:34:10.176Z"
+        },
+        "width": 200,
+        "height": 120
+      },
+      {
+        "id": "pp-1",
+        "type": "dynamicNode",
+        "position": {
+          "x": 300,
+          "y": 250
+        },
+        "data": {
+          "label": "Packet Processor",
+          "model_type": "Accelerator",
+          "iconName": "Zap",
+          "componentId": "dsp-accelerator-001",
+          "interfaces": [
+            {
+              "id": "axi-stream",
+              "name": "AXI4-Stream Interface",
+              "direction": "master",
+              "speed": "500 MHz",
+              "busType": "AXI4",
+              "dataWidth": 512,
+              "addrWidth": 32,
+              "idWidth": 4
+            }
+          ],
+          "properties": {
+            "power": {
+              "typical": "5W",
+              "peak": "8W",
+              "idle": "500mW",
+              "voltage": "1.0V"
+            },
+            "physical": {
+              "area": "20 mm²",
+              "technology": "7nm",
+              "packageType": "BGA"
+            },
+            "defaultPathLatency": 10
+          },
+          "visualization": {
+            "icon": "Radio",
+            "width": 160,
+            "height": 100
+          },
+          "createdAt": "2025-10-21T00:34:10.176Z",
+          "updatedAt": "2025-10-21T00:34:10.176Z"
+        },
+        "width": 160,
+        "height": 100
+      },
+      {
+        "id": "eth-1",
+        "type": "dynamicNode",
+        "position": {
+          "x": 50,
+          "y": 400
+        },
+        "data": {
+          "label": "100GE Port 1",
+          "model_type": "IO",
+          "iconName": "Cable",
+          "componentId": "ethernet-10g-001",
+          "interfaces": [
+            {
+              "id": "pcie-interface",
+              "name": "PCIe x4 Interface",
+              "direction": "master",
+              "speed": "8 GT/s",
+              "busType": "AXI4",
+              "dataWidth": 4,
+              "addrWidth": 32,
+              "idWidth": 4
+            },
+            {
+              "id": "ethernet-phy",
+              "name": "10GBASE-T PHY",
+              "direction": "master",
+              "speed": "10 Gbps",
+              "optional": true,
+              "busType": "Ethernet"
+            }
+          ],
+          "properties": {
+            "power": {
+              "typical": "2W",
+              "peak": "3W",
+              "idle": "200mW",
+              "voltage": "1.8V"
+            },
+            "physical": {
+              "area": "15 mm²",
+              "technology": "16nm",
+              "packageType": "BGA"
+            },
+            "defaultPathLatency": 10
+          },
+          "visualization": {
+            "icon": "Cable",
+            "width": 160,
+            "height": 100
+          },
+          "createdAt": "2025-10-21T00:34:10.176Z",
+          "updatedAt": "2025-10-21T00:34:10.176Z"
+        },
+        "width": 160,
+        "height": 100
+      },
+      {
+        "id": "eth-2",
+        "type": "dynamicNode",
+        "position": {
+          "x": 130,
+          "y": 400
+        },
+        "data": {
+          "label": "100GE Port 2",
+          "model_type": "IO",
+          "iconName": "Cable",
+          "componentId": "ethernet-10g-001",
+          "interfaces": [
+            {
+              "id": "pcie-interface",
+              "name": "PCIe x4 Interface",
+              "direction": "master",
+              "speed": "8 GT/s",
+              "busType": "AXI4",
+              "dataWidth": 4,
+              "addrWidth": 32,
+              "idWidth": 4
+            },
+            {
+              "id": "ethernet-phy",
+              "name": "10GBASE-T PHY",
+              "direction": "master",
+              "speed": "10 Gbps",
+              "optional": true,
+              "busType": "Ethernet"
+            }
+          ],
+          "properties": {
+            "power": {
+              "typical": "2W",
+              "peak": "3W",
+              "idle": "200mW",
+              "voltage": "1.8V"
+            },
+            "physical": {
+              "area": "15 mm²",
+              "technology": "16nm",
+              "packageType": "BGA"
+            },
+            "defaultPathLatency": 10
+          },
+          "visualization": {
+            "icon": "Cable",
+            "width": 160,
+            "height": 100
+          },
+          "createdAt": "2025-10-21T00:34:10.177Z",
+          "updatedAt": "2025-10-21T00:34:10.177Z"
+        },
+        "width": 160,
+        "height": 100
+      },
+      {
+        "id": "eth-3",
+        "type": "dynamicNode",
+        "position": {
+          "x": 210,
+          "y": 400
+        },
+        "data": {
+          "label": "100GE Port 3",
+          "model_type": "IO",
+          "iconName": "Cable",
+          "componentId": "ethernet-10g-001",
+          "interfaces": [
+            {
+              "id": "pcie-interface",
+              "name": "PCIe x4 Interface",
+              "direction": "master",
+              "speed": "8 GT/s",
+              "busType": "AXI4",
+              "dataWidth": 4,
+              "addrWidth": 32,
+              "idWidth": 4
+            },
+            {
+              "id": "ethernet-phy",
+              "name": "10GBASE-T PHY",
+              "direction": "master",
+              "speed": "10 Gbps",
+              "optional": true,
+              "busType": "Ethernet"
+            }
+          ],
+          "properties": {
+            "power": {
+              "typical": "2W",
+              "peak": "3W",
+              "idle": "200mW",
+              "voltage": "1.8V"
+            },
+            "physical": {
+              "area": "15 mm²",
+              "technology": "16nm",
+              "packageType": "BGA"
+            },
+            "defaultPathLatency": 10
+          },
+          "visualization": {
+            "icon": "Cable",
+            "width": 160,
+            "height": 100
+          },
+          "createdAt": "2025-10-21T00:34:10.177Z",
+          "updatedAt": "2025-10-21T00:34:10.177Z"
+        },
+        "width": 160,
+        "height": 100
+      },
+      {
+        "id": "eth-4",
+        "type": "dynamicNode",
+        "position": {
+          "x": 290,
+          "y": 400
+        },
+        "data": {
+          "label": "100GE Port 4",
+          "model_type": "IO",
+          "iconName": "Cable",
+          "componentId": "ethernet-10g-001",
+          "interfaces": [
+            {
+              "id": "pcie-interface",
+              "name": "PCIe x4 Interface",
+              "direction": "master",
+              "speed": "8 GT/s",
+              "busType": "AXI4",
+              "dataWidth": 4,
+              "addrWidth": 32,
+              "idWidth": 4
+            },
+            {
+              "id": "ethernet-phy",
+              "name": "10GBASE-T PHY",
+              "direction": "master",
+              "speed": "10 Gbps",
+              "optional": true,
+              "busType": "Ethernet"
+            }
+          ],
+          "properties": {
+            "power": {
+              "typical": "2W",
+              "peak": "3W",
+              "idle": "200mW",
+              "voltage": "1.8V"
+            },
+            "physical": {
+              "area": "15 mm²",
+              "technology": "16nm",
+              "packageType": "BGA"
+            },
+            "defaultPathLatency": 10
+          },
+          "visualization": {
+            "icon": "Cable",
+            "width": 160,
+            "height": 100
+          },
+          "createdAt": "2025-10-21T00:34:10.177Z",
+          "updatedAt": "2025-10-21T00:34:10.177Z"
+        },
+        "width": 160,
+        "height": 100
+      },
+      {
+        "id": "eth-5",
+        "type": "dynamicNode",
+        "position": {
+          "x": 370,
+          "y": 400
+        },
+        "data": {
+          "label": "100GE Port 5",
+          "model_type": "IO",
+          "iconName": "Cable",
+          "componentId": "ethernet-10g-001",
+          "interfaces": [
+            {
+              "id": "pcie-interface",
+              "name": "PCIe x4 Interface",
+              "direction": "master",
+              "speed": "8 GT/s",
+              "busType": "AXI4",
+              "dataWidth": 4,
+              "addrWidth": 32,
+              "idWidth": 4
+            },
+            {
+              "id": "ethernet-phy",
+              "name": "10GBASE-T PHY",
+              "direction": "master",
+              "speed": "10 Gbps",
+              "optional": true,
+              "busType": "Ethernet"
+            }
+          ],
+          "properties": {
+            "power": {
+              "typical": "2W",
+              "peak": "3W",
+              "idle": "200mW",
+              "voltage": "1.8V"
+            },
+            "physical": {
+              "area": "15 mm²",
+              "technology": "16nm",
+              "packageType": "BGA"
+            },
+            "defaultPathLatency": 10
+          },
+          "visualization": {
+            "icon": "Cable",
+            "width": 160,
+            "height": 100
+          },
+          "createdAt": "2025-10-21T00:34:10.177Z",
+          "updatedAt": "2025-10-21T00:34:10.177Z"
+        },
+        "width": 160,
+        "height": 100
+      },
+      {
+        "id": "eth-6",
+        "type": "dynamicNode",
+        "position": {
+          "x": 450,
+          "y": 400
+        },
+        "data": {
+          "label": "100GE Port 6",
+          "model_type": "IO",
+          "iconName": "Cable",
+          "componentId": "ethernet-10g-001",
+          "interfaces": [
+            {
+              "id": "pcie-interface",
+              "name": "PCIe x4 Interface",
+              "direction": "master",
+              "speed": "8 GT/s",
+              "busType": "AXI4",
+              "dataWidth": 4,
+              "addrWidth": 32,
+              "idWidth": 4
+            },
+            {
+              "id": "ethernet-phy",
+              "name": "10GBASE-T PHY",
+              "direction": "master",
+              "speed": "10 Gbps",
+              "optional": true,
+              "busType": "Ethernet"
+            }
+          ],
+          "properties": {
+            "power": {
+              "typical": "2W",
+              "peak": "3W",
+              "idle": "200mW",
+              "voltage": "1.8V"
+            },
+            "physical": {
+              "area": "15 mm²",
+              "technology": "16nm",
+              "packageType": "BGA"
+            },
+            "defaultPathLatency": 10
+          },
+          "visualization": {
+            "icon": "Cable",
+            "width": 160,
+            "height": 100
+          },
+          "createdAt": "2025-10-21T00:34:10.177Z",
+          "updatedAt": "2025-10-21T00:34:10.177Z"
+        },
+        "width": 160,
+        "height": 100
+      },
+      {
+        "id": "eth-7",
+        "type": "dynamicNode",
+        "position": {
+          "x": 530,
+          "y": 400
+        },
+        "data": {
+          "label": "100GE Port 7",
+          "model_type": "IO",
+          "iconName": "Cable",
+          "componentId": "ethernet-10g-001",
+          "interfaces": [
+            {
+              "id": "pcie-interface",
+              "name": "PCIe x4 Interface",
+              "direction": "master",
+              "speed": "8 GT/s",
+              "busType": "AXI4",
+              "dataWidth": 4,
+              "addrWidth": 32,
+              "idWidth": 4
+            },
+            {
+              "id": "ethernet-phy",
+              "name": "10GBASE-T PHY",
+              "direction": "master",
+              "speed": "10 Gbps",
+              "optional": true,
+              "busType": "Ethernet"
+            }
+          ],
+          "properties": {
+            "power": {
+              "typical": "2W",
+              "peak": "3W",
+              "idle": "200mW",
+              "voltage": "1.8V"
+            },
+            "physical": {
+              "area": "15 mm²",
+              "technology": "16nm",
+              "packageType": "BGA"
+            },
+            "defaultPathLatency": 10
+          },
+          "visualization": {
+            "icon": "Cable",
+            "width": 160,
+            "height": 100
+          },
+          "createdAt": "2025-10-21T00:34:10.177Z",
+          "updatedAt": "2025-10-21T00:34:10.177Z"
+        },
+        "width": 160,
+        "height": 100
+      },
+      {
+        "id": "eth-8",
+        "type": "dynamicNode",
+        "position": {
+          "x": 610,
+          "y": 400
+        },
+        "data": {
+          "label": "100GE Port 8",
+          "model_type": "IO",
+          "iconName": "Cable",
+          "componentId": "ethernet-10g-001",
+          "interfaces": [
+            {
+              "id": "pcie-interface",
+              "name": "PCIe x4 Interface",
+              "direction": "master",
+              "speed": "8 GT/s",
+              "busType": "AXI4",
+              "dataWidth": 4,
+              "addrWidth": 32,
+              "idWidth": 4
+            },
+            {
+              "id": "ethernet-phy",
+              "name": "10GBASE-T PHY",
+              "direction": "master",
+              "speed": "10 Gbps",
+              "optional": true,
+              "busType": "Ethernet"
+            }
+          ],
+          "properties": {
+            "power": {
+              "typical": "2W",
+              "peak": "3W",
+              "idle": "200mW",
+              "voltage": "1.8V"
+            },
+            "physical": {
+              "area": "15 mm²",
+              "technology": "16nm",
+              "packageType": "BGA"
+            },
+            "defaultPathLatency": 10
+          },
+          "visualization": {
+            "icon": "Cable",
+            "width": 160,
+            "height": 100
+          },
+          "createdAt": "2025-10-21T00:34:10.177Z",
+          "updatedAt": "2025-10-21T00:34:10.177Z"
+        },
+        "width": 160,
+        "height": 100
+      }
+    ],
+    "edges": [
+      {
+        "id": "e1",
+        "source": "cpu-1",
+        "target": "pcie-1",
+        "sourceHandle": "axi-data-master",
+        "targetHandle": "axi-slave",
+        "type": "smoothstep",
+        "animated": false
+      },
+      {
+        "id": "e2",
+        "source": "pcie-1",
+        "target": "pp-1",
+        "sourceHandle": "pcie-lanes",
+        "targetHandle": "axi-slave",
+        "type": "smoothstep",
+        "animated": false
+      },
+      {
+        "id": "e3",
+        "source": "pp-1",
+        "target": "eth-1",
+        "sourceHandle": "data-out-0",
+        "targetHandle": "data-in",
+        "type": "smoothstep",
+        "animated": false
+      },
+      {
+        "id": "e4",
+        "source": "pp-1",
+        "target": "eth-2",
+        "sourceHandle": "data-out-1",
+        "targetHandle": "data-in",
+        "type": "smoothstep",
+        "animated": false
+      },
+      {
+        "id": "e5",
+        "source": "pp-1",
+        "target": "eth-3",
+        "sourceHandle": "data-out-2",
+        "targetHandle": "data-in",
+        "type": "smoothstep",
+        "animated": false
+      },
+      {
+        "id": "e6",
+        "source": "pp-1",
+        "target": "eth-4",
+        "sourceHandle": "data-out-3",
+        "targetHandle": "data-in",
+        "type": "smoothstep",
+        "animated": false
+      },
+      {
+        "id": "e7",
+        "source": "pp-1",
+        "target": "eth-5",
+        "sourceHandle": "data-out-4",
+        "targetHandle": "data-in",
+        "type": "smoothstep",
+        "animated": false
+      },
+      {
+        "id": "e8",
+        "source": "pp-1",
+        "target": "eth-6",
+        "sourceHandle": "data-out-5",
+        "targetHandle": "data-in",
+        "type": "smoothstep",
+        "animated": false
+      },
+      {
+        "id": "e9",
+        "source": "pp-1",
+        "target": "eth-7",
+        "sourceHandle": "data-out-6",
+        "targetHandle": "data-in",
+        "type": "smoothstep",
+        "animated": false
+      },
+      {
+        "id": "e10",
+        "source": "pp-1",
+        "target": "eth-8",
+        "sourceHandle": "data-out-7",
+        "targetHandle": "data-in",
+        "type": "smoothstep",
+        "animated": false
+      }
+    ]
+  },
+  "icon": "Network",
+  "category": "networking"
+}

@@ -1,0 +1,321 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  :root {
+    --background: 255 43% 95%; /* #F2F0F9 - Very light grayish-purple */
+    --foreground: 255 10% 20%; /* Dark grayish-purple for text */
+    --card: 255 43% 98%; /* Slightly lighter than background */
+    --card-foreground: 255 10% 20%;
+    --popover: 255 43% 98%;
+    --popover-foreground: 255 10% 20%;
+    --primary: 255 37% 47%; /* #6750A4 - Deep purple */
+    --primary-foreground: 0 0% 100%; /* White text on primary */
+    --secondary: 255 30% 88%; /* Lighter shade of purple/grey */
+    --secondary-foreground: 255 10% 20%;
+    --muted: 255 30% 88%;
+    --muted-foreground: 255 15% 45%; /* Lighter muted text color */
+    --accent: 255 18% 45%; /* #675D89 - Blue-purple */
+    --accent-foreground: 0 0% 100%; /* White text on accent */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 255 25% 85%; /* Adjusted border color */
+    --input: 255 25% 85%; /* Adjusted input border */
+    --ring: 255 37% 47%; /* Primary color for rings */
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+
+    /* Sidebar specific theme variables, can be adjusted if needed based on main theme */
+    --sidebar-background: 255 30% 92%; /* Slightly different from main bg for distinction */
+    --sidebar-foreground: 255 10% 25%;
+    --sidebar-primary: 255 37% 47%; 
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 255 18% 50%; 
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 255 25% 80%;
+    --sidebar-ring: 255 37% 47%;
+    /* Xterm.js ANSI Colors */
+    --black: #000000;
+    --red: #cd3131;
+    --green: #0dbc79;
+    --yellow: #e5e510;
+    --blue: #2472c8;
+    --magenta: #bc3fbc;
+    --cyan: #11a8cd;
+    --white: #e5e5e5;
+    --bright-black: #666666;
+    --bright-red: #f14c4c;
+    --bright-green: #23d18b;
+    --bright-yellow: #f5f543;
+    --bright-blue: #3b8eea;
+    --bright-magenta: #d670d6;
+    --bright-cyan: #29b8db;
+    --bright-white: #e5e5e5;
+  }
+  .dark {
+    --background: 255 10% 12%; /* Darker purple-gray */
+    --foreground: 255 30% 92%; /* Lighter grayish-purple text */
+    --card: 255 10% 15%;
+    --card-foreground: 255 30% 92%;
+    --popover: 255 10% 15%;
+    --popover-foreground: 255 30% 92%;
+    --primary: 255 37% 60%; /* Lighter version of primary for dark mode */
+    --primary-foreground: 255 10% 10%; /* Dark text on lighter primary */
+    --secondary: 255 15% 22%;
+    --secondary-foreground: 255 30% 92%;
+    --muted: 255 15% 22%;
+    --muted-foreground: 255 25% 70%;
+    --accent: 255 18% 55%; /* Lighter version of accent for dark mode */
+    --accent-foreground: 255 10% 10%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 255 15% 25%;
+    --input: 255 15% 25%;
+    --ring: 255 37% 60%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    
+    --sidebar-background: 255 10% 10%; 
+    --sidebar-foreground: 255 30% 90%;
+    --sidebar-primary: 255 37% 55%;
+    --sidebar-primary-foreground: 255 10% 5%;
+    --sidebar-accent: 255 18% 50%;
+    --sidebar-accent-foreground: 255 10% 5%;
+    --sidebar-border: 255 15% 20%;
+    --sidebar-ring: 255 37% 55%;
+    /* Xterm.js ANSI Colors */
+    --black: #000000;
+    --red: #cd3131;
+    --green: #0dbc79;
+    --yellow: #e5e510;
+    --blue: #2472c8;
+    --magenta: #bc3fbc;
+    --cyan: #11a8cd;
+    --white: #e5e5e5;
+    --bright-black: #666666;
+    --bright-red: #f14c4c;
+    --bright-green: #23d18b;
+    --bright-yellow: #f5f543;
+    --bright-blue: #3b8eea;
+    --bright-magenta: #d670d6;
+    --bright-cyan: #29b8db;
+    --bright-white: #e5e5e5;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom scrollbar styling for Xterm.js viewport */
+.custom-xterm-container .xterm-viewport::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.custom-xterm-container .xterm-viewport::-webkit-scrollbar-track {
+  background-color: #ffffff;
+  border-radius: 0;
+}
+
+.custom-xterm-container .xterm-viewport::-webkit-scrollbar-thumb {
+  background-color: #888888;
+  border-radius: 0;
+}
+
+.custom-xterm-container .xterm-viewport::-webkit-scrollbar-thumb:hover {
+  background-color: #555555;
+}
+
+/* For Firefox */
+.custom-xterm-container .xterm-viewport {
+  scrollbar-width: thin;
+  scrollbar-color: #888888 #ffffff;
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+.react-flow {
+	--xy-edge-stroke-default: #b1b1b7;
+	--xy-edge-stroke-width-default: 1;
+	--xy-edge-stroke-selected-default: #555;
+	--xy-connectionline-stroke-default: #b1b1b7;
+	--xy-connectionline-stroke-width-default: 1;
+	--xy-attribution-background-color-default: #ffffff80;
+	--xy-minimap-background-color-default: #fff;
+	--xy-minimap-mask-background-color-default: #f0f0f099;
+	--xy-minimap-mask-stroke-color-default: transparent;
+	--xy-minimap-mask-stroke-width-default: 1;
+	--xy-minimap-node-background-color-default: #e2e2e2;
+	--xy-minimap-node-stroke-color-default: transparent;
+	--xy-minimap-node-stroke-width-default: 2;
+	--xy-background-color-default: transparent;
+	--xy-background-pattern-dots-color-default: #91919a;
+	--xy-background-pattern-lines-color-default: #eee;
+	--xy-background-pattern-cross-color-default: #e2e2e2;
+	--xy-node-color-default: white;
+	--xy-node-border-default: 1px solid white;
+	--xy-node-background-color-default: rgb(154,135,198);
+	--xy-node-group-background-color-default: #f0f0f040;
+	--xy-node-boxshadow-hover-default: 0 1px 4px 1px #00000014;
+	--xy-node-boxshadow-selected-default: 0 0 0 .5px #1a192b; /* Using a darker border for selection for contrast */
+	--xy-node-border-radius-default: 3px;
+	--xy-handle-background-color-default: #1a192b;
+	--xy-handle-border-color-default: #fff;
+	--xy-selection-background-color-default: #0059dc14;
+	--xy-selection-border-default: 1px dotted #0059dccc;
+	--xy-controls-button-background-color-default: #fefefe;
+	--xy-controls-button-background-color-hover-default: #f4f4f4;
+	--xy-controls-button-color-default: inherit;
+	--xy-controls-button-color-hover-default: inherit;
+	--xy-controls-button-border-color-default: #eee;
+	--xy-controls-box-shadow-default: 0 0 2px 1px #00000014;
+	--xy-edge-label-background-color-default: #fff;
+	--xy-edge-label-color-default: inherit;
+	--xy-resize-background-color-default: #3367d9;
+	direction: ltr;
+}
+
+.react-flow__handle {
+	pointer-events: none;
+	background-color: #ddd;
+	border-radius: 5px;
+	width: 12px;
+	height: 7px;
+	position: absolute;
+}
+
+.react-flow__handle-right {
+	top: 50%;
+	right: 0;
+	transform: translate(50%,-50%);
+}
+
+.react-flow__handle.connectionindicator {
+	pointer-events: all;
+	cursor: crosshair;
+}
+
+.home-flow-c .react-flow__handle {
+	background-color: #ddd;
+	border-radius: 5px;
+	width: 12px;
+	height: 7px;
+}
+
+
+.react-flow__edge.selectable {
+	cursor: pointer;
+}
+
+.react-flow__edge {
+	pointer-events: visibleStroke;
+}
+
+.react-flow__node.draggable {
+	cursor: grab;
+	pointer-events: all;
+}
+
+.react-flow__node {
+	-webkit-user-select: none;
+	user-select: none;
+	pointer-events: all;
+	transform-origin: 0 0;
+	box-sizing: border-box;
+	cursor: default;
+	position: absolute;
+}
+
+/* Explicit styles for default React Flow nodes */
+.react-flow__node-default {
+  background-color: rgb(154,135,198);
+  color: white;
+  border: 1px solid white;
+  border-radius: 3px;
+}
+
+.react-flow__node-default.selected {
+  box-shadow: 0 0 0 0.5px #1a192b; /* Keeping a darker shadow for selection to ensure visibility */
+}
+
+/* Gridstack specific styles */
+/* Let GridStack's default .grid-stack-item-content provide the base structure.
+   Our custom card component will live inside it and style itself. */
+.grid-stack > .grid-stack-item > .grid-stack-item-content {
+  /* This is GridStack's direct child of grid-stack-item.
+     Default Gridstack CSS applies: position: absolute; inset: 0; overflow: auto;
+     We can override overflow if our custom card's shadow needs to be visible. */
+  overflow: visible; /* Allow shadows from inner card to escape this immediate container */
+}
+
+/* Removed the general .grid-stack-item-content styling block that defined card-like features,
+   as EmulationCardContainer will now provide these styles for its own div. */
+
+
+.grid-stack > .grid-stack-item > .grid-stack-item-content {
+  /* This was the specific rule with inset: 4px. We're removing it to let
+     the .grid-stack-item-content fill the .grid-stack-item by default.
+     The EmulationCardContainer inside it will have its own padding. */
+  /* inset: 4px; */ /* REMOVED */
+}
+
+
+.dark .grid-stack-item-content {
+  /* If EmulationCardContainer uses theme variables, this might not be needed.
+     If it's just inheriting, these might need to target the specific EmulationCardContainer class. */
+  /* background-color: hsl(var(--card)); */ /* REMOVED if handled by EmulationCardContainer */
+  /* border-color: hsl(var(--border)); */   /* REMOVED if handled by EmulationCardContainer */
+}
+
+.grid-stack-placeholder > .placeholder-content {
+  border: 1px dashed hsl(var(--primary)) !important;
+  background-color: hsla(var(--primary), 0.1) !important;
+}
+
+/* Template carousel animation */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-left {
+  animation: scroll-left 30s linear infinite;
+}
+
+.pause-animation:hover {
+  animation-play-state: paused;
+}

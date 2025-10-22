@@ -1,0 +1,30 @@
+{
+  "timestamp": "2025-10-15T19:07:57.356Z",
+  "environment": {
+    "nodeVersion": "v20.19.2",
+    "npmVersion": "10.8.2",
+    "platform": "linux"
+  },
+  "project": {
+    "name": "soc-pilot",
+    "version": "1.0.0",
+    "dependencies": 11,
+    "devDependencies": 18
+  },
+  "files": {
+    "totalFiles": 23,
+    "typeScriptFiles": 21,
+    "componentFiles": 17,
+    "patternFiles": 5
+  },
+  "health": {
+    "typeScriptCompiles": true,
+    "schemasValid": true,
+    "libraryValid": true,
+    "testsPass": true
+  },
+  "services": {
+    "backend": "unknown",
+    "frontend": "unknown"
+  }
+}

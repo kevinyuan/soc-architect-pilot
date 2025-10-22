@@ -1,0 +1,198 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://soc-pilot.com/schemas/component.json",
+  "title": "SOC Component Template",
+  "description": "Golden template for system component definition. Use this as reference when creating new components for the component library.",
+
+  "// REQUIRED FIELDS": "======================================",
+
+  "id": "component-unique-id-001",
+  "_comment_id": "Unique identifier for this component (kebab-case recommended). Format: {type}-{name}-{version}. Example: pcie-gen4-x16-001",
+
+  "name": "Component Display Name",
+  "_comment_name": "Human-readable name shown in UI. Example: 'PCIe Gen4 x16 Controller'",
+
+  "category": "CPU",
+  "_comment_category": "Component category. Valid values: 'CPU', 'Memory', 'Interconnect', 'IO', 'Accelerator', 'Custom'. Used for filtering and organization.",
+
+  "version": "1.0.0",
+  "_comment_version": "Semantic version of this component definition. Format: MAJOR.MINOR.PATCH. Required for all components.",
+
+  "createdAt": "2025-10-21T00:00:00.000Z",
+  "_comment_createdAt": "ISO 8601 timestamp of creation. Required for all components.",
+
+  "updatedAt": "2025-10-21T00:00:00.000Z",
+  "_comment_updatedAt": "ISO 8601 timestamp of last update. Required for all components. Updated automatically on changes.",
+
+  "interfaces": [
+    {
+      "id": "interface-id-1",
+      "_comment_id": "Unique ID for this interface within the component (kebab-case). Example: 'axi-master', 'pcie-lanes-out'",
+
+      "name": "Interface Display Name",
+      "_comment_name": "Human-readable interface name. Example: 'AXI4 Master Interface', 'DDR4 Memory Channel'",
+
+      "direction": "master",
+      "_comment_direction": "Interface direction. For bus interfaces: 'master' (initiates requests/transactions), 'slave' (receives requests/responds), 'master & slave' (can both initiate and receive requests). For simple signals: 'input', 'output', 'inout'. NOTE: master/slave refers to request initiation, NOT data flow direction (a master can read FROM slave or write TO slave).",
+
+      "busType": "AXI4",
+      "_comment_busType": "Bus/protocol type. Valid values: 'PCIe', 'DDR', 'AXI4', 'AXI4-Lite', 'AXI4-Stream', 'AHB', 'APB', 'GPIO', 'SPI', 'I2C', 'UART', 'Ethernet', 'WiFi', 'USB', 'CXL', 'Custom'",
+
+      "dataWidth": 64,
+      "_comment_dataWidth": "Data bus width in bits. REQUIRED. Example: 32, 64, 128, 256",
+
+      "speed": "1 GHz",
+      "_comment_speed": "Operating frequency or data rate. REQUIRED. Default: '1 GHz'. Examples: '1.5 GHz', '16 GT/s', '10 Gbps'",
+
+      "// OPTIONAL INTERFACE FIELDS": "--------------------------------------",
+
+      "addrWidth": 32,
+      "_comment_addrWidth": "Address bus width in bits (for memory-mapped interfaces). Example: 32, 40, 64",
+
+      "idWidth": 4,
+      "_comment_idWidth": "ID width for AXI/similar protocols. Example: 4, 6, 8",
+
+      "placement": "north",
+      "_comment_placement": "Visual placement on node. Valid values: 'north', 'south', 'east', 'west'. Determines where connection handles appear.",
+
+      "voltage": "1.8V",
+      "_comment_voltage": "Operating voltage for this interface. Example: '1.8V', '3.3V', '0.9V'",
+
+      "optional": false,
+      "_comment_optional": "Whether this interface is optional (can be disabled/unused). Default: false"
+    }
+  ],
+  "_comment_interfaces": "Array of interface definitions. Must have at least one interface. Each interface represents a connection point on the component.",
+
+  "// OPTIONAL COMPONENT FIELDS": "======================================",
+
+  "description": "Detailed description of the component, its functionality, use cases, and key features. This appears in component details and documentation.",
+  "_comment_description": "Long-form text description. Can include technical specifications, performance characteristics, and usage notes.",
+
+  "properties": {
+    "_comment_properties": "Physical and electrical characteristics of the component",
+
+    "power": {
+      "typical": "2.5W",
+      "_comment_typical": "Typical power consumption under normal operation",
+
+      "peak": "4.0W",
+      "_comment_peak": "Maximum power consumption under peak load",
+
+      "idle": "0.5W",
+      "_comment_idle": "Power consumption in idle/low-power mode",
+
+      "voltage": "0.9V",
+      "_comment_voltage": "Core operating voltage (can be a range like '0.8V - 1.0V')"
+    },
+
+    "physical": {
+      "area": "12 mm²",
+      "_comment_area": "Silicon die area or physical footprint",
+
+      "technology": "7nm",
+      "_comment_technology": "Process technology node. Examples: '7nm', '28nm', '16nm FinFET'",
+
+      "packageType": "BGA",
+      "_comment_packageType": "Package type. Examples: 'BGA', 'QFP', 'IP Core', 'FPGA Fabric'"
+    },
+
+    "performance": {
+      "clockFrequency": "1.5 GHz",
+      "_comment_clockFrequency": "Operating clock frequency",
+
+      "throughput": "32 GB/s",
+      "_comment_throughput": "Maximum data throughput"
+    },
+
+    "defaultPathLatency": 3,
+    "_comment_defaultPathLatency": "Default latency in cycles for routing through this component. Used in performance analysis when specific path latency is not defined.",
+
+    "pathLatencies": [
+      {
+        "_comment_pathLatencies": "Optional: Specific latencies for paths between interfaces. For a component with n inputs and m outputs, there are n*m possible paths. Define specific paths here as needed.",
+
+        "pathId": "path-1",
+        "_comment_pathId": "Unique identifier for this path within the component",
+
+        "from": "interface-id-1",
+        "_comment_from": "Source interface ID (must match an interface.id in this component)",
+
+        "to": "interface-id-2",
+        "_comment_to": "Destination interface ID (must match an interface.id in this component)",
+
+        "latencyTypical": 5,
+        "_comment_latencyTypical": "Typical latency in cycles for this specific path. Used in performance analysis.",
+
+        "latencyMin": 3,
+        "_comment_latencyMin": "Optional: Minimum latency in cycles (best case)",
+
+        "latencyMax": 8,
+        "_comment_latencyMax": "Optional: Maximum latency in cycles (worst case)"
+      }
+    ],
+    "_comment_pathLatencies_usage": "If pathLatencies is specified for a given path, use latencyTypical in calculations. Otherwise, use defaultPathLatency."
+  },
+
+  "visualization": {
+    "_comment_visualization": "Visual appearance configuration for the component in the canvas",
+
+    "icon": "Network",
+    "_comment_icon": "Lucide icon name. Common values: 'Cpu', 'Network', 'Database', 'Zap', 'Cable', 'HardDrive', 'Radio', 'Chip'",
+
+    "width": 200,
+    "_comment_width": "Node width in pixels on canvas. Standard: 200 for large, 160 for medium components",
+
+    "height": 120,
+    "_comment_height": "Node height in pixels on canvas. Standard: 120 for large, 100 for medium components"
+  },
+
+  "addressMapping": {
+    "_comment_addressMapping": "Memory-mapped address space configuration for this component",
+
+    "baseAddress": "0xC0000000",
+    "_comment_baseAddress": "Base address in hexadecimal. Example: '0x40000000', '0xC0000000'",
+
+    "addressSpace": "256MB",
+    "_comment_addressSpace": "Size of address space. Examples: '4KB', '1MB', '256MB', '1GB'"
+  },
+
+  "tags": [
+    "tag1",
+    "tag2",
+    "high-speed"
+  ],
+  "_comment_tags": "Array of searchable tags for categorization and filtering. Use lowercase kebab-case.",
+
+  "vendor": "Synopsys",
+  "_comment_vendor": "Component vendor or IP provider. Example: 'ARM', 'Synopsys', 'Cadence', 'Xilinx'",
+
+  "partNumber": "DesignWare PCIe 4.0",
+  "_comment_partNumber": "Manufacturer part number or model name",
+
+  "datasheet": "https://www.example.com/datasheet.pdf",
+  "_comment_datasheet": "URL to official datasheet or documentation",
+
+  "compatibility": [
+    "Standard 1",
+    "Standard 2",
+    "Protocol A"
+  ],
+  "_comment_compatibility": "List of compatible standards, protocols, or other components",
+
+  "customizable": true,
+  "_comment_customizable": "Whether this component can be customized/parameterized by users. Default: false",
+
+  "baseTemplate": "base-component-id",
+  "_comment_baseTemplate": "If this component is derived from another, specify the base component ID",
+
+  "// USAGE NOTES": "======================================",
+  "_usage_note_1": "This template shows ALL possible fields. Required component fields: 'id', 'name', 'category', 'version', 'createdAt', 'updatedAt', 'interfaces'. Required interface fields: 'id', 'name', 'direction', 'busType', 'dataWidth', 'speed'.",
+  "_usage_note_2": "All fields starting with '_comment_' or '//' are for documentation only and should be removed in actual component files.",
+  "_usage_note_3": "Interface 'busType' values must match the BusType enum defined in types/index.ts",
+  "_usage_note_4": "Component 'category' values must match ComponentCategory enum: CPU, Memory, Interconnect, IO, Accelerator, Custom",
+  "_usage_note_5": "Timestamps (createdAt, updatedAt) must be in ISO 8601 format: YYYY-MM-DDTHH:mm:ss.sssZ",
+  "_usage_note_6": "Connection handles are auto-generated from interface placement. customHandles has been deprecated.",
+  "_usage_note_7": "Save component files to data/components/{component-id}.json",
+  "_usage_note_8": "After adding a new component, restart the server to reload the library"
+}
